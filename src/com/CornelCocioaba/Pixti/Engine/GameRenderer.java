@@ -1,18 +1,11 @@
 package com.CornelCocioaba.Pixti.Engine;
 
 import android.content.Context;
-import aurelienribon.tweenengine.Tween;
+import android.view.MotionEvent;
 import aurelienribon.tweenengine.TweenManager;
-import aurelienribon.tweenengine.equations.Bounce;
-import aurelienribon.tweenengine.equations.Elastic;
-import aurelienribon.tweenengine.equations.Quad;
 
 import com.CornelCocioaba.Pixti.GameObject.AnimatedSprite;
-import com.CornelCocioaba.Pixti.GameObject.GameObjectAccessor;
-import com.CornelCocioaba.Pixti.GameObject.Rectangle;
 import com.CornelCocioaba.Pixti.GameObject.Scene;
-import com.CornelCocioaba.Pixti.GameObject.Sprite;
-import com.CornelCocioaba.Pixti.OpenGL.Color;
 import com.CornelCocioaba.Pixti.OpenGL.Texture;
 import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
 
@@ -22,6 +15,7 @@ public class GameRenderer extends BaseGameRenderer {
 	private Scene scene;
 	private final TweenManager tweenManager = new TweenManager();
 	private Context context;
+	private AnimatedSprite volt;
 
 	public GameRenderer(Context context) {
 		this.context = context;
@@ -68,7 +62,7 @@ public class GameRenderer extends BaseGameRenderer {
 		TextureRegion volt0 = new TextureRegion(spritesheetVolt, 4 * 240, 292, 240, 292);
 		spritesheetVolt.load();
 
-		AnimatedSprite volt = new AnimatedSprite(200, 200, 100, volt1, volt2, volt3, volt4, volt5, volt6, volt7, volt8,
+		volt = new AnimatedSprite(200, 200, 100, volt1, volt2, volt3, volt4, volt5, volt6, volt7, volt8,
 				volt9, volt0);
 		scene.addChild(volt);
 	}
@@ -80,4 +74,7 @@ public class GameRenderer extends BaseGameRenderer {
 		tweenManager.update(0.016f);
 	}
 
+	public boolean onTouchEvent(MotionEvent event){
+		return volt.onTouchEvent(event);
+	}
 }
