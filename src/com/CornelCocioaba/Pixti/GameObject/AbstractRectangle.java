@@ -13,7 +13,7 @@ public abstract class AbstractRectangle extends Shape {
 	protected static short triangles[] = new short[] { 0, 1, 2, 0, 2, 3 };
 	
 	public AbstractRectangle(float x, float y, float width, float height, Color color){
-		this(x, y, width, height, color, Anchor.MIDDLE_CENTER);
+		this(x, y, width, height, color, Anchor.BOTTOM_LEFT);
 	}
 	
 	public AbstractRectangle(float x, float y, float width, float height, Color color, Anchor anchor){
@@ -72,6 +72,11 @@ public abstract class AbstractRectangle extends Shape {
 	public void setColor(Color color){
 		mColor = color;
 		setColors(vertexColors(mColor));
+	}
+	
+	public void setScale(float scale){
+		this.scaleX = scale;
+		this.scaleY = scale;
 	}
 	
 	public void setGradientColor(Color from, Color to){

@@ -1,5 +1,6 @@
 package com.CornelCocioaba.Pixti.OpenGL;
 
+import static android.opengl.GLES20.GL_CLAMP_TO_EDGE;
 import static android.opengl.GLES20.GL_LINEAR;
 import static android.opengl.GLES20.GL_LINEAR_MIPMAP_LINEAR;
 import static android.opengl.GLES20.GL_NEAREST;
@@ -7,6 +8,8 @@ import static android.opengl.GLES20.GL_REPEAT;
 import static android.opengl.GLES20.GL_TEXTURE_2D;
 import static android.opengl.GLES20.GL_TEXTURE_MAG_FILTER;
 import static android.opengl.GLES20.GL_TEXTURE_MIN_FILTER;
+import static android.opengl.GLES20.GL_TEXTURE_WRAP_S;
+import static android.opengl.GLES20.GL_TEXTURE_WRAP_T;
 import static android.opengl.GLES20.glBindTexture;
 import static android.opengl.GLES20.glGenTextures;
 import static android.opengl.GLES20.glGenerateMipmap;
@@ -30,7 +33,8 @@ public class Texture {
 	public int mWidth;
 	public int mHeight;
 	public Bitmap mBitmap;
-
+	public int textureId;
+	
 	public static class TexParams {
 		public int TEXTURE_TYPE = GL_TEXTURE_2D;
 		public int MIN_FILTER = GL_NEAREST;
@@ -77,10 +81,14 @@ public class Texture {
 		
 		glBindTexture(GL_TEXTURE_2D, textureObjectIds[0]);
 		
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_S, GL_CLAMP_TO_EDGE);
+		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_WRAP_T, GL_CLAMP_TO_EDGE);
+
 		//triliniar filtering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 		//biliniar filtering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
+		
 		
 		GLUtils.texImage2D(GL_TEXTURE_2D, 0, mBitmap, 0);
 		
@@ -89,6 +97,7 @@ public class Texture {
 		glGenerateMipmap(GL_TEXTURE_2D);
 		glBindTexture(GL_TEXTURE_2D, 0);
 		
+		this.textureId = textureObjectIds[0];
 		return textureObjectIds[0];
 	}
 }

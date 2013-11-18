@@ -7,7 +7,7 @@ public class GameSurfaceView extends GLSurfaceView {
 
 	// private GameRenderer mRenderer;
 //	private PixelPerfectTestRenderer mRenderer;
-	private CamRendererTest mRenderer;
+	private Renderer mRenderer;
 
 	public GameSurfaceView(Context context) {
 		super(context);
@@ -16,7 +16,7 @@ public class GameSurfaceView extends GLSurfaceView {
 		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
 		// this.mRenderer = new GameRenderer();
-		this.mRenderer = new CamRendererTest(context);
+		this.mRenderer = new GameRenderer(context);
 
 		setRenderer(this.mRenderer);
 	}

@@ -6,6 +6,9 @@ public class GameObjectAccessor implements TweenAccessor<GameObject>{
 	public static final int POSITION_X = 1;
     public static final int POSITION_Y = 2;
     public static final int POSITION_XY = 3;
+    public static final int SCALE_X = 4;
+    public static final int SCALE_Y = 5;
+    public static final int SCALE_XY = 6;
     
 	@Override
 	public int getValues(GameObject target, int tweenType, float[] returnValues) {

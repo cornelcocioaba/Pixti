@@ -1,44 +1,38 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import java.nio.FloatBuffer;
-
-import android.content.Context;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import com.CornelCocioaba.Pixti.Engine.Camera;
 import com.CornelCocioaba.Pixti.OpenGL.Color;
-import com.CornelCocioaba.Pixti.OpenGL.Texture;
+import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
 import com.CornelCocioaba.Pixti.OpenGL.TextureShaderProgram;
-import com.CornelCocioaba.Pixti.Utils.BufferUtils;
 
 public class Sprite extends AbstractRectangle{
 
-	private final TextureShaderProgram mProgram;
-	private final float[] mMVPMatrix = new float[16];
-	private Texture texture;
-	private int textureId;
+	protected final TextureShaderProgram mProgram;
+	protected final float[] mMVPMatrix = new float[16];
+	protected TextureRegion textureRegion;
 	
-	float[] uvs = new float[]{
-			0.0f, 1.0f,
-			0.0f, 0.0f,
-			1.0f, 0.0f,
-			1.0f, 1.0f,
-	};
-	private final FloatBuffer uvBuffer;
+	public Sprite(TextureRegion textureRegion, int x, int y){
+		this(textureRegion, x, y, textureRegion.getWidth(), textureRegion.getHeight());
+	}
 	
-	public Sprite(Context context, float x, float y, float width, float height, String path) {
-		this(context, x, y, width, height, Color.WHITE, Anchor.MIDDLE_CENTER, path);
+	public Sprite(TextureRegion textureRegion, float x, float y, float width, float height) {
+		this(textureRegion, x, y, width, height, Color.WHITE, Anchor.MIDDLE_CENTER);
 	}
 
-	public Sprite(Context context, float x, float y, float width, float height, Color color, Anchor anchor, String path) {
+	public Sprite(TextureRegion textureRegion, float x, float y, float width, float height, Color color, Anchor anchor) {
 		super(x, y, width, height, color, anchor);
 		
-		uvBuffer = BufferUtils.createFloatBuffer(uvs);
 		mProgram = new TextureShaderProgram();
-		texture = new Texture(context, path);
-		textureId = texture.load();
+		this.textureRegion = textureRegion;
 	}
+	
+	public TextureRegion getTextureRegion(){
+		return textureRegion;
+	}
+	
 	
 	@Override
 	public void Draw(Camera cam) {
@@ -50,11 +44,11 @@ public class Sprite extends AbstractRectangle{
 		Matrix.scaleM(mMVPMatrix, 0, scaleX, scaleY, 0);
 		Matrix.multiplyMM(mMVPMatrix, 0, cam.mCombinedMatrix, 0, mMVPMatrix, 0);
 
-		mProgram.setUniforms(mMVPMatrix, textureId);
+		mProgram.setUniforms(mMVPMatrix, textureRegion.getTexture().textureId);
 		mProgram.setVertexBufferPointer(vertexBuffer);
 		mProgram.enablePositionAttribute();
 		mProgram.enableTextureCoordinatesAttribute();
-		mProgram.setTextureCoordinatesPointer(uvBuffer);
+		mProgram.setTextureCoordinatesPointer(textureRegion.getUvBuffer());
 		
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);

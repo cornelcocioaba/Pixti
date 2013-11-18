@@ -7,6 +7,7 @@ public class Color {
 	public static Color RED = new Color(1.0f, 0.0f, 0.0f, 1.0f);
 	public static Color GREEN = new Color(0.0f, 1.0f, 0.0f, 1.0f);
 	public static Color BLUE = new Color(0.0f, 0.0f, 1.0f, 1.0f);
+	public static Color YELLOW = new Color(1.0f, 1.0f, 0.0f, 0.0f);
 
 	private float mRed;
 	private float mGreen;
