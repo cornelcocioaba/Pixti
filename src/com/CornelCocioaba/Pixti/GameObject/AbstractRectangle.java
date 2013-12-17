@@ -12,12 +12,15 @@ public abstract class AbstractRectangle extends Shape {
 
 	protected static short triangles[] = new short[] { 0, 1, 2, 0, 2, 3 };
 	
+	public AbstractRectangle(float x, float y, float width, float height){
+		this(x, y, width, height, Color.WHITE);
+	}
+	
 	public AbstractRectangle(float x, float y, float width, float height, Color color){
 		this(x, y, width, height, color, Anchor.BOTTOM_LEFT);
 	}
 	
 	public AbstractRectangle(float x, float y, float width, float height, Color color, Anchor anchor){
-		super(getVerts(width, height, anchor), triangles, vertexColors(color));
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -26,14 +29,16 @@ public abstract class AbstractRectangle extends Shape {
 		this.scaleY = 1;
 		this.mAngle = 0;
 		this.mColor = color;
+		this.setVertices(this.getVerts(width, height, anchor));
+		this.setColor(color);
+		this.setTriangles(triangles);
 	}
-	public 
-
-	static float[] getVerts(float width, float height) {
+	
+	public float[] getVerts(float width, float height) {
 		return new float[] { 0, 0, 0, height, width, height, width, 0 };
 	}
 	
-	static float[] getVerts(float width, float height, Anchor anchor) {
+	public float[] getVerts(float width, float height, Anchor anchor) {
 		float[] vertices;
 		switch(anchor){
 		case BOTTOM_LEFT:
@@ -98,10 +103,13 @@ public abstract class AbstractRectangle extends Shape {
 		setColors(colors);
 	}
 
-	static float[] vertexColors(Color color){
-		return new float[] { color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(), color.getRed(),
-				color.getGreen(), color.getBlue(), color.getAlpha(), color.getRed(), color.getGreen(), color.getBlue(),
-				color.getAlpha(), color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() };
+	float[] vertexColors(Color color){
+		return new float[] { 
+				color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(),
+				color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(), 
+				color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha(), 
+				color.getRed(), color.getGreen(), color.getBlue(), color.getAlpha() 
+				};
 	}
 
 	public enum Anchor {

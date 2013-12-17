@@ -53,8 +53,8 @@ public class Sprite extends AbstractRectangle {
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
 
-		GLES20.glDrawElements(GLES20.GL_TRIANGLES, triangles.length, GLES20.GL_UNSIGNED_SHORT, this.triangleBuffer);
-		// GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 4);
+		//GLES20.glDrawElements(GLES20.GL_TRIANGLES, triangles.length, GLES20.GL_UNSIGNED_SHORT, this.triangleBuffer);
+		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 4);
 
 		GLES20.glDisable(GLES20.GL_BLEND);
 

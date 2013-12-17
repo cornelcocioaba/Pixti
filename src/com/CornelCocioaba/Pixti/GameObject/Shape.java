@@ -16,28 +16,32 @@ public abstract class Shape extends GameObject{
 	protected ShortBuffer triangleBuffer;
 	protected FloatBuffer colorBuffer;
 	
-	public Shape(float[] vertices, short[] triangles, float[] colors){
-		setVertices(vertices);
-		setTriangles(triangles);
-		
-		mVertexColors = colors;
-		
-		vertexBuffer = BufferUtils.createFloatBuffer(vertices);
-		triangleBuffer = BufferUtils.createShortBuffer(triangles);
-		colorBuffer = BufferUtils.createFloatBuffer(colors);
-	}
+	protected int vertexCount;
 	
-	private void setVertices(float[] vertices){
+	public void setVertices(float[] vertices){
 		mVertices = vertices;
+		updateVertexBuffer();
 	}
 	
-	private void setTriangles(short[] triangles){
+	public void updateVertexBuffer(){
+		vertexBuffer = BufferUtils.createFloatBuffer(mVertices);
+	}
+	
+	public void setTriangles(short[] triangles){
 		mTriangles = triangles;
+		updateTriangleBuffer();
+	}
+	
+	public void updateTriangleBuffer(){
+		triangleBuffer = BufferUtils.createShortBuffer(mTriangles);		
 	}
 	
 	public void setColors(float[] colors){
 		mVertexColors = colors;
-		colorBuffer.put(mVertexColors);
-		colorBuffer.position(0);
+		updateColorBuffer();
+	}
+	
+	public void updateColorBuffer(){
+		colorBuffer = BufferUtils.createFloatBuffer(mVertexColors);
 	}
 }

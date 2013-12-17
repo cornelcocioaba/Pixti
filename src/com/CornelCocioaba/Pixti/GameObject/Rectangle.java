@@ -39,7 +39,8 @@ public class Rectangle extends AbstractRectangle {
 		mProgram.enablePositionAttribute();
 		mProgram.enableColorAttribute();
 		
-		GLES20.glDrawElements(GLES20.GL_TRIANGLES, triangles.length, GLES20.GL_UNSIGNED_SHORT, this.triangleBuffer);
+		GLES20.glDrawArrays(GLES20.GL_TRIANGLE_FAN, 0, 4);
+		//GLES20.glDrawElements(GLES20.GL_TRIANGLES, triangles.length, GLES20.GL_UNSIGNED_SHORT, this.triangleBuffer);
 
 		mProgram.disablePositionAttribute();
 		mProgram.disableColorAttribute();

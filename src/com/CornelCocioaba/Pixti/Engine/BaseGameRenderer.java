@@ -79,7 +79,6 @@ public abstract class BaseGameRenderer implements Renderer {
 			mFirstDraw = false;
 		}
 	}
-
 	public int getFPS() {
 		return mFPS;
 	}

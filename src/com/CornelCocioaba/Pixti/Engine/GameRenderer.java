@@ -2,27 +2,29 @@ package com.CornelCocioaba.Pixti.Engine;
 
 import android.content.Context;
 import android.view.MotionEvent;
+import android.view.View.OnTouchListener;
 import aurelienribon.tweenengine.TweenManager;
 
 import com.CornelCocioaba.Pixti.GameObject.AnimatedSprite;
+import com.CornelCocioaba.Pixti.GameObject.BouncingBall;
+import com.CornelCocioaba.Pixti.GameObject.Rectangle;
 import com.CornelCocioaba.Pixti.GameObject.Scene;
-import com.CornelCocioaba.Pixti.OpenGL.Texture;
-import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
+import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public class GameRenderer extends BaseGameRenderer {
 
-	private Camera cam;
-	private Scene scene;
+	public Camera cam;
+	public Scene scene;
 	private final TweenManager tweenManager = new TweenManager();
 	private Context context;
 	private AnimatedSprite volt;
-
 	public GameRenderer(Context context) {
 		this.context = context;
 	}
 
 	@Override
 	public void onCreate(int width, int height, boolean contextLost) {
+		Debug.log(width + " " + height);
 		cam = new Camera(width, height);
 
 		scene = new Scene();
@@ -48,33 +50,43 @@ public class GameRenderer extends BaseGameRenderer {
 		 * 1f).target(1000, 150).ease(Bounce.OUT).repeat (-1, 0.2f).start(tweenManager);
 		 */
 
-		Texture spritesheetVolt = new Texture(context, "spritesheet.png");
-		TextureRegion volt1 = new TextureRegion(spritesheetVolt, 0 * 240, 0, 240, 292);
-		TextureRegion volt2 = new TextureRegion(spritesheetVolt, 1 * 240, 0, 240, 292);
-		TextureRegion volt3 = new TextureRegion(spritesheetVolt, 2 * 240, 0, 240, 292);
-		TextureRegion volt4 = new TextureRegion(spritesheetVolt, 3 * 240, 0, 240, 292);
-		TextureRegion volt5 = new TextureRegion(spritesheetVolt, 4 * 240, 0, 240, 292);
+		// Texture spritesheetVolt = new Texture(context, "spritesheet.png");
+		// TextureRegion volt1 = new TextureRegion(spritesheetVolt, 0 * 240, 0, 240, 292);
+		// TextureRegion volt2 = new TextureRegion(spritesheetVolt, 1 * 240, 0, 240, 292);
+		// TextureRegion volt3 = new TextureRegion(spritesheetVolt, 2 * 240, 0, 240, 292);
+		// TextureRegion volt4 = new TextureRegion(spritesheetVolt, 3 * 240, 0, 240, 292);
+		// TextureRegion volt5 = new TextureRegion(spritesheetVolt, 4 * 240, 0, 240, 292);
+		//
+		// TextureRegion volt6 = new TextureRegion(spritesheetVolt, 0 * 240, 292, 240, 292);
+		// TextureRegion volt7 = new TextureRegion(spritesheetVolt, 1 * 240, 292, 240, 292);
+		// TextureRegion volt8 = new TextureRegion(spritesheetVolt, 2 * 240, 292, 240, 292);
+		// TextureRegion volt9 = new TextureRegion(spritesheetVolt, 3 * 240, 292, 240, 292);
+		// TextureRegion volt0 = new TextureRegion(spritesheetVolt, 4 * 240, 292, 240, 292);
+		// spritesheetVolt.load();
+		//
+		// volt = new AnimatedSprite(200, 200, 100, volt1, volt2, volt3, volt4, volt5, volt6, volt7, volt8,
+		// volt9, volt0);
+		// scene.addChild(volt);
 
-		TextureRegion volt6 = new TextureRegion(spritesheetVolt, 0 * 240, 292, 240, 292);
-		TextureRegion volt7 = new TextureRegion(spritesheetVolt, 1 * 240, 292, 240, 292);
-		TextureRegion volt8 = new TextureRegion(spritesheetVolt, 2 * 240, 292, 240, 292);
-		TextureRegion volt9 = new TextureRegion(spritesheetVolt, 3 * 240, 292, 240, 292);
-		TextureRegion volt0 = new TextureRegion(spritesheetVolt, 4 * 240, 292, 240, 292);
-		spritesheetVolt.load();
+		/*
+		 * Texture logo = new Texture(context, "logo.png"); TextureRegion logoTextureRegion = new TextureRegion(logo);
+		 * logo.load(); Sprite s2 = new Sprite(logoTextureRegion, 150, 350, 128, 128); scene.addChild(s2);
+		 * 
+		 * Rectangle r = new Rectangle(150, 150, 128, 128); scene.addChild(r)
+		 */;
 
-		volt = new AnimatedSprite(200, 200, 100, volt1, volt2, volt3, volt4, volt5, volt6, volt7, volt8,
-				volt9, volt0);
-		scene.addChild(volt);
+		Rectangle r = new Rectangle(1000, 150, 128, 128);
+		scene.addChild(r);
+		
+		BouncingBall circle = new BouncingBall(550, 720, 50);
+		scene.addChild(circle);
 	}
+	
 
 	@Override
 	public void onDrawFrame(boolean firstDraw) {
 		scene.Update();
 		scene.Draw(cam);
 		tweenManager.update(0.016f);
-	}
-
-	public boolean onTouchEvent(MotionEvent event){
-		return volt.onTouchEvent(event);
 	}
 }

@@ -12,7 +12,10 @@ public class GameObject implements IUpdateable, IDrawable {
 	protected GameObject parent = null;
 	protected ArrayList<GameObject> children = new ArrayList<GameObject>();
 
-	protected float x, y;
+	public float x, y;
+	public float width, height;
+	public float scaleX = 1.0f, scaleY = 1.0f;
+	public float mAngle;
 
 	public GameObject() {
 		this(0, 0);
@@ -22,23 +25,6 @@ public class GameObject implements IUpdateable, IDrawable {
 		this.x = x;
 		this.y = y;
 		name = getClass().getName();
-	}
-
-	// getters/setters
-	public float getX() {
-		return x;
-	}
-
-	public float getY() {
-		return y;
-	}
-
-	public void setX(float pX) {
-		x = pX;
-	}
-
-	public void setY(float pY) {
-		y = pY;
 	}
 
 	public void addChild(GameObject obj) {

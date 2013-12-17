@@ -13,11 +13,11 @@ public class GameObjectAccessor implements TweenAccessor<GameObject>{
 	@Override
 	public int getValues(GameObject target, int tweenType, float[] returnValues) {
 		 switch (tweenType) {
-         case POSITION_X: returnValues[0] = target.getX(); return 1;
-         case POSITION_Y: returnValues[0] = target.getY(); return 1;
+         case POSITION_X: returnValues[0] = target.x; return 1;
+         case POSITION_Y: returnValues[0] = target.y; return 1;
          case POSITION_XY:
-             returnValues[0] = target.getX();
-             returnValues[1] = target.getY();
+             returnValues[0] = target.x;
+             returnValues[1] = target.y;
              return 2;
          default: assert false; return -1;
      }
@@ -26,11 +26,11 @@ public class GameObjectAccessor implements TweenAccessor<GameObject>{
 	@Override
 	public void setValues(GameObject target, int tweenType, float[] newValues) {
 		switch (tweenType) {
-        case POSITION_X: target.setX(newValues[0]); break;
-        case POSITION_Y: target.setY(newValues[0]); break;
+        case POSITION_X: target.x = newValues[0]; break;
+        case POSITION_Y: target.y = newValues[0]; break;
         case POSITION_XY:
-            target.setX(newValues[0]);
-            target.setY(newValues[1]);
+            target.x = newValues[0];
+            target.y = newValues[1];
             break;
         default: assert false; break;
     }

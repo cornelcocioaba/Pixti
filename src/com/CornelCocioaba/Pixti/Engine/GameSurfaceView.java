@@ -2,12 +2,9 @@ package com.CornelCocioaba.Pixti.Engine;
 
 import android.content.Context;
 import android.opengl.GLSurfaceView;
-import android.view.MotionEvent;
 
 public class GameSurfaceView extends GLSurfaceView {
 
-	// private GameRenderer mRenderer;
-	// private PixelPerfectTestRenderer mRenderer;
 	private GameRenderer mRenderer;
 
 	public GameSurfaceView(Context context) {
@@ -20,10 +17,5 @@ public class GameSurfaceView extends GLSurfaceView {
 		this.mRenderer = new GameRenderer(context);
 
 		setRenderer(this.mRenderer);
-	}
-
-	@Override
-	public boolean onTouchEvent(MotionEvent event) {
-		return mRenderer.onTouchEvent(event);
 	}
 }

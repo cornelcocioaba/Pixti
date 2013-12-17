@@ -4,17 +4,17 @@ import android.app.Activity;
 import android.app.ActivityManager;
 import android.content.Context;
 import android.content.pm.ConfigurationInfo;
-import android.opengl.GLSurfaceView;
 import android.os.Build;
 import android.os.Bundle;
 import android.view.Menu;
+import android.view.MotionEvent;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
 public class GameActivity extends Activity {
 
-	private GLSurfaceView mGameSurfaceView;
+	private GameSurfaceView mGameSurfaceView;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -64,5 +64,4 @@ public class GameActivity extends Activity {
 
 		return supportsEs2;
 	}
-
 }
