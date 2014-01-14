@@ -3,6 +3,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 import java.util.ArrayList;
 
 import com.CornelCocioaba.Pixti.Engine.Camera;
+import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public class GameObject implements IUpdateable, IDrawable {
 
@@ -30,12 +31,24 @@ public class GameObject implements IUpdateable, IDrawable {
 		name = getClass().getName();
 	}
 
-	public void addChild(GameObject obj) {
-		children.add(obj);
+	public void addChild(GameObject go) {
+		go.parent = this;
+		children.add(go);
 	}
 
-	public void removeChild(GameObject obj) {
-		children.remove(obj);
+	public void removeChild(GameObject go) {
+		go.parent = null;
+		children.remove(go);
+	}
+
+	public void removeSelf() {
+		if (parent != null)
+			parent.removeChild(this);
+	}
+
+	public void removeChildren() {
+		if (children != null)
+			children.clear();
 	}
 
 	@Override
@@ -48,8 +61,7 @@ public class GameObject implements IUpdateable, IDrawable {
 
 	@Override
 	public void Update() {
-		final int size = children.size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i <  children.size(); i++) {
 			children.get(i).Update();
 		}
 	}

@@ -1,0 +1,25 @@
+Pixti TODO list :
+["--" completed, "-" not completed]
+
+--Camera
+--Game Renderer
+--GameObject
+--Shape
+--Rectangle
+--Sprite
+--Shader support
+--Shader Programs
+--Tween engine
+
+-fix timestep game loop
+-Animated Sprite
+-Touch
+-Text
+-Accelerometer
+-Sounds and Music
+-Particle System
+-VBO, IBO, VAO
+-Test Game
+-Optimizations
+-Testing
+-extend to 3D

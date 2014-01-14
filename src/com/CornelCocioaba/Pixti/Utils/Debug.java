@@ -28,6 +28,8 @@ public class Debug {
     	log(String.valueOf(msg));
     }
     
+    
+    
     public static void logInfo(String msg){
     	if(ON){
     		Log.i(TAG, msg);
@@ -48,5 +50,28 @@ public class Debug {
     
     public static void logInfo(double msg){
     	logInfo(String.valueOf(msg));
+    }
+    
+    
+    public static void logError(String msg){
+    	if(ON){
+    		Log.e(TAG, msg);
+    	}
+    }
+    
+    public static void logError(short msg){
+    	logError(String.valueOf(msg));
+    }
+    
+    public static void logError(int msg){
+    	logError(String.valueOf(msg));
+    }
+    
+    public static void logError(float msg){
+    	logError(String.valueOf(msg));
+    }
+    
+    public static void logError(double msg){
+    	logError(String.valueOf(msg));
     }
 }

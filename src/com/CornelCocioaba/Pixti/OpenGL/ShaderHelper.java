@@ -13,7 +13,6 @@ import static android.opengl.GLES20.glDeleteProgram;
 import static android.opengl.GLES20.glDeleteShader;
 import static android.opengl.GLES20.glGetProgramInfoLog;
 import static android.opengl.GLES20.glGetProgramiv;
-import static android.opengl.GLES20.glGetShaderInfoLog;
 import static android.opengl.GLES20.glGetShaderiv;
 import static android.opengl.GLES20.glLinkProgram;
 import static android.opengl.GLES20.glShaderSource;
@@ -52,7 +51,8 @@ public class ShaderHelper {
 		glGetShaderiv(shaderObjectId, GL_COMPILE_STATUS, compileStatus, 0);
 
 		if (Debug.ON) {
-			Log.v(TAG, "Results of compiling source:" + "\n" + shaderCode + "\n:" + glGetShaderInfoLog(shaderObjectId));
+			// Log.v(TAG, "Results of compiling source:" + "\n" + shaderCode + "\n:" +
+			// glGetShaderInfoLog(shaderObjectId));
 		}
 
 		if (compileStatus[0] == 0) {
@@ -89,7 +89,7 @@ public class ShaderHelper {
 		glGetProgramiv(programObjectId, GL_LINK_STATUS, linkStatus, 0);
 
 		if (Debug.ON) {
-			Log.v(TAG, "Results of linking program:\n" + glGetProgramInfoLog(programObjectId));
+			// Log.v(TAG, "Results of linking program:\n" + glGetProgramInfoLog(programObjectId));
 		}
 
 		if (linkStatus[0] == 0) {
@@ -109,8 +109,9 @@ public class ShaderHelper {
 		glValidateProgram(programObjectId);
 		final int[] validateStatus = new int[1];
 		glGetProgramiv(programObjectId, GL_VALIDATE_STATUS, validateStatus, 0);
-		Log.v(TAG, "Results of validating program: " + validateStatus[0] + "\nLog:"
-				+ glGetProgramInfoLog(programObjectId));
+
+			Log.v(TAG, "Results of validating program: " + validateStatus[0] + "\nLog:"
+					+ glGetProgramInfoLog(programObjectId));
 
 		return validateStatus[0] != 0;
 	}
@@ -124,7 +125,7 @@ public class ShaderHelper {
 		program = linkProgram(vertexShader, fragmentShader);
 
 		if (Debug.ON) {
-			validateProgram(program);
+			//validateProgram(program);
 		}
 
 		return program;

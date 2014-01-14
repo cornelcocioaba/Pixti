@@ -8,7 +8,7 @@ public class TextureRegion {
 
 	private Texture texture;
 	public float u1, v1, u2, v2;
-	private float width, height;
+	private float x, y, width, height;
 	
 	private FloatBuffer uvBuffer;
 
@@ -18,12 +18,21 @@ public class TextureRegion {
 
 	public TextureRegion(Texture texture, float x, float y, float width, float height) {
 		this.texture = texture;
-		float invWidth = 1f / texture.mWidth;
-		float invHeight = 1f / texture.mHeight;
-		this.setUvs(x * invWidth, y * invHeight, (x + width) * invWidth, (y + height) * invHeight);
+		this.x = x;
+		this.y = y;
 		this.width = width;
 		this.height = height;
+
+		float invWidth = 1f / texture.mWidth;
+		float invHeight = 1f / texture.mHeight;
+		
+		this.setUvs(x * invWidth, y * invHeight, (x + width) * invWidth, (y + height) * invHeight);
+		
 		this.uvBuffer = BufferUtils.createFloatBuffer(getUVs());
+	}
+	
+	public TextureRegion deepCopy(){
+		return new TextureRegion(this.texture, this.x, this.y, this.width, this.height);
 	}
 	
 	public float[] getUVs() {

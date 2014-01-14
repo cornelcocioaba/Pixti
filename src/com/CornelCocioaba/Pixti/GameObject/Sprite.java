@@ -60,6 +60,8 @@ public class Sprite extends AbstractRectangle {
 
 		mProgram.disablePositionAttribute();
 		mProgram.disableTextureCoordinatesAttribute();
+		
+		super.Draw(cam);
 	}
 
 	public boolean onTouchEvent(MotionEvent event) {

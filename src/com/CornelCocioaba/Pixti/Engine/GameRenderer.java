@@ -3,6 +3,7 @@ package com.CornelCocioaba.Pixti.Engine;
 import android.content.Context;
 import aurelienribon.tweenengine.TweenManager;
 
+import com.CornelCocioaba.Pixti.AndroidInvaders.InvadersScene;
 import com.CornelCocioaba.Pixti.GameObject.Scene;
 
 public class GameRenderer extends BaseGameRenderer {
@@ -11,7 +12,7 @@ public class GameRenderer extends BaseGameRenderer {
 	private final TweenManager tweenManager = new TweenManager();
 	
 	public GameRenderer(Context context) {
-		scene = new GameScene(context);
+		scene = new InvadersScene(context);
 	}
 
 	@Override
