@@ -7,7 +7,7 @@ import com.CornelCocioaba.Pixti.Utils.BufferUtils;
 public class TextureRegion {
 
 	private Texture texture;
-	private float u1, v1, u2, v2;
+	public float u1, v1, u2, v2;
 	private float width, height;
 	
 	private FloatBuffer uvBuffer;
@@ -27,7 +27,12 @@ public class TextureRegion {
 	}
 	
 	public float[] getUVs() {
-		return new float[] { u1, v2, u1, v1, u2, v1, u2, v2 };
+		return new float[] { 
+				u1, v2,
+				u1, v1, 
+				u2, v1,
+				u2, v2
+				};
 		//return new float[] { u2, v1, u2, v2, u1, v1, u1, v2 };
 	}
 

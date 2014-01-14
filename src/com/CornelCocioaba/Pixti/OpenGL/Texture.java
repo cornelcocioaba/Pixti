@@ -66,6 +66,12 @@ public class Texture {
 			ex.printStackTrace();
 		}
 	}
+	
+	public Texture(Bitmap bitmap){
+		mBitmap = bitmap;
+		mWidth = mBitmap.getWidth();
+		mHeight = mBitmap.getHeight();
+	}
 
 	public int load() {
 		final int[] textureObjectIds = new int[1];
@@ -86,6 +92,7 @@ public class Texture {
 
 		//triliniar filtering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
+		
 		//biliniar filtering
 		glTexParameteri(GL_TEXTURE_2D, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 		

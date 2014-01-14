@@ -8,7 +8,7 @@ public class Debug {
     
     public static void log(String msg){
     	if(ON){
-    		Log.v(TAG, msg);
+    		Log.d(TAG, msg);
     	}
     }
     
@@ -26,5 +26,27 @@ public class Debug {
     
     public static void log(double msg){
     	log(String.valueOf(msg));
+    }
+    
+    public static void logInfo(String msg){
+    	if(ON){
+    		Log.i(TAG, msg);
+    	}
+    }
+    
+    public static void logInfo(short msg){
+    	logInfo(String.valueOf(msg));
+    }
+    
+    public static void logInfo(int msg){
+    	logInfo(String.valueOf(msg));
+    }
+    
+    public static void logInfo(float msg){
+    	logInfo(String.valueOf(msg));
+    }
+    
+    public static void logInfo(double msg){
+    	logInfo(String.valueOf(msg));
     }
 }

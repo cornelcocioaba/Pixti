@@ -10,20 +10,21 @@ import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public abstract class BaseGameRenderer implements Renderer {
 
-	private boolean mFirstDraw;
 	private boolean mSurfaceCreated;
 	private int mWidth;
 	private int mHeight;
 	private long mLastTime;
+	private int nbFrames;
 	private int mFPS;
 
 	public BaseGameRenderer() {
-		mFirstDraw = true;
 		mSurfaceCreated = false;
 		mWidth = -1;
 		mHeight = -1;
 		mLastTime = System.currentTimeMillis();
-		mFPS = 0;
+		nbFrames = 0;
+		mFPS = 60;
+		Time.Init();
 	}
 
 	@Override
@@ -34,6 +35,8 @@ public abstract class BaseGameRenderer implements Renderer {
 		mSurfaceCreated = true;
 		mWidth = -1;
 		mHeight = -1;
+		
+		onSurfaceCreated();
 	}
 
 	@Override
@@ -58,32 +61,33 @@ public abstract class BaseGameRenderer implements Renderer {
 		mWidth = width;
 		mHeight = height;
 
-		onCreate(mWidth, mHeight, mSurfaceCreated);
+		onChangedSurface(mWidth, mHeight);
 		mSurfaceCreated = false;
 	}
 
 	@Override
 	public void onDrawFrame(GL10 notUsed) {
-		onDrawFrame(mFirstDraw);
 
+		Time.Update();
+		
 		if (BuildConfig.DEBUG) {
-			mFPS++;
+			nbFrames++;
 			long currentTime = System.currentTimeMillis();
 			if (currentTime - mLastTime >= 1000) {
-				mFPS = 0;
+				mFPS = nbFrames;
+				nbFrames = 0;
 				mLastTime = currentTime;
 			}
 		}
-
-		if (mFirstDraw) {
-			mFirstDraw = false;
-		}
+		onDrawFrame();
 	}
 	public int getFPS() {
 		return mFPS;
 	}
 
-	public abstract void onCreate(int width, int height, boolean contextLost);
+	public abstract void onSurfaceCreated();
+	
+	public abstract void onChangedSurface(int width, int height);
 
-	public abstract void onDrawFrame(boolean firstDraw);
+	public abstract void onDrawFrame();
 }

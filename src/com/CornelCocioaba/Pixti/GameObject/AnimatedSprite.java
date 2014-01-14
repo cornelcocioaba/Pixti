@@ -8,8 +8,8 @@ public class AnimatedSprite extends Sprite {
 	protected int currentTexture;
 	protected double duration, lastChange;
 
-	public AnimatedSprite(int x, int y, double duration, TextureRegion... regions) {
-		super(regions[0], x, y);
+	public AnimatedSprite(float x, float y, double duration, TextureRegion... regions) {
+		super( x, y,regions[0]);
 
 		this.textureRegions = regions;
 		this.currentTexture = 0;

@@ -15,15 +15,18 @@ public class GameObject implements IUpdateable, IDrawable {
 	public float x, y;
 	public float width, height;
 	public float scaleX = 1.0f, scaleY = 1.0f;
-	public float mAngle;
+	public float angle;
 
 	public GameObject() {
 		this(0, 0);
 	}
 
-	public GameObject(int x, int y) {
+	public GameObject(float x, float y) {
 		this.x = x;
 		this.y = y;
+		this.scaleX = 1.0f;
+		this.scaleY = 1.0f;
+		this.angle = 0.0f;
 		name = getClass().getName();
 	}
 

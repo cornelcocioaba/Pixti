@@ -56,7 +56,7 @@ public class TextureShaderProgram extends ShaderProgram {
 		aTextureCoordinatesLocation = glGetAttribLocation(program, A_TEXTURE_COORDINATES);
 	}
 	
-	public void setUniforms(float[] matrix, int textureId){
+	public void setTextureId(float[] matrix, int textureId){
 		glUniformMatrix4fv(uMatrixLocation, 1, false, matrix,0);
 		
 		glActiveTexture(GL_TEXTURE0);

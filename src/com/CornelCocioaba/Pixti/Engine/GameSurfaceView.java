@@ -13,8 +13,8 @@ public class GameSurfaceView extends GLSurfaceView {
 		setEGLContextClientVersion(2);
 		setEGLConfigChooser(8, 8, 8, 8, 16, 0);
 
-		// this.mRenderer = new GameRenderer();
 		this.mRenderer = new GameRenderer(context);
+		this.setOnTouchListener(mRenderer.scene);
 
 		setRenderer(this.mRenderer);
 	}

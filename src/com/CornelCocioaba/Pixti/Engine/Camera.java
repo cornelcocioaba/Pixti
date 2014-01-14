@@ -3,13 +3,12 @@ package com.CornelCocioaba.Pixti.Engine;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.CornelCocioaba.Pixti.Math.Vector2;
-
 //orthographic camera
 
 public class Camera {
 
-	private Vector2 position = new Vector2();
+	public float x, y;
+	private float zoom;
 
 	private final float[] mProjectionMatrix = new float[16];
 	private final float[] mViewMatrix = new float[16];
@@ -18,9 +17,13 @@ public class Camera {
 	private float mViewportWidth;
 	private float mViewportHeight;
 
-//	private float zoom;
-
+	public Camera(int viewportWidth, int viewportHeight) {
+		this((float)viewportWidth, (float)viewportHeight);
+	}
+	
 	public Camera(float viewportWidth, float viewportHeight) {
+		x = 0;
+		y = 0;
 		mViewportWidth = viewportWidth;
 		mViewportHeight = viewportHeight;
 		update();
@@ -29,19 +32,21 @@ public class Camera {
 	/**
 	 * Update camera matrices. Call this whenever the camera changes
 	 */
-	public void update() {
+	private void update() {
 		GLES20.glViewport(0, 0, (int) mViewportWidth, (int) mViewportHeight);
-		for (int i = 0; i < 16; i++) {
-
-			mProjectionMatrix[i] = 0;
-			mViewMatrix[i] = 0;
-			mCombinedMatrix[i] = 0;
-		}
+		
+		Matrix.setIdentityM(mProjectionMatrix, 0);
+		Matrix.setIdentityM(mViewMatrix, 0);
+		Matrix.setIdentityM(mCombinedMatrix, 0);
 
 		Matrix.orthoM(mProjectionMatrix, 0, 0f, mViewportWidth, 0f, mViewportHeight, 0, 50);
 
-		Matrix.setLookAtM(mViewMatrix, 0, position.x, position.y, 1f, 0f, 0f, 0f, 0f, 1.0f, 0.0f);
-
+		Matrix.setLookAtM(mViewMatrix, 0,
+				x, y, 1f,  		//eye position
+				x, y, -1f, 	//center position
+				0f, 1.0f, 0.0f 	//up
+				); 
+		
 		Matrix.multiplyMM(mCombinedMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 	}
 
@@ -57,5 +62,20 @@ public class Camera {
 
 	public float getViewportHeight() {
 		return mViewportHeight;
+	}
+	
+	public void setPosition(float x, float y){
+		this.x = x;
+		this.y = y;
+		
+		update();
+	}
+	
+	public void translate(float deltaX, float deltaY)
+	{
+		x += deltaX;
+		y += deltaY;
+		
+		update();
 	}
 }
