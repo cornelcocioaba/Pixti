@@ -6,7 +6,7 @@ public class HUD extends GameObject {
 
 	private Camera hudCamera;
 	
-	public HUD(float width, float height){
+	public HUD(int width, int height){
 		hudCamera = new Camera(width, height);
 	}
 	

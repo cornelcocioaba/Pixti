@@ -1,7 +1,5 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import java.util.ArrayList;
-
 import android.content.Context;
 import android.opengl.GLES20;
 import android.view.MotionEvent;
@@ -21,21 +19,20 @@ import com.CornelCocioaba.Pixti.Utils.Debug;
 public abstract class Scene implements OnTouchListener {
 	protected Camera mMainCamera;
 	protected HUD mHud;
+	protected GameObject mRoot;
 	
 	protected Context mContext;
 	
-	protected ArrayList<GameObject> children = new ArrayList<GameObject>();
-	
-	private Color mBackgroundColor;
-	
+	protected Color mBackgroundColor;
 	
 	public Scene(Context context) {
 		mContext = context;
+		mRoot = new GameObject();
 		Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
 		mBackgroundColor = new Color(0.0f, 0.6f, 0.8f, 1.0f);
 	}
 	
-	public void createCamera(float width, float height){
+	public void createCamera(int width, int height){
 		mMainCamera = new Camera(width, height);
 	}
 	
@@ -59,19 +56,20 @@ public abstract class Scene implements OnTouchListener {
 		mHud = hud;
 	}
 	
-	public void addChild(GameObject obj) {
-		children.add(obj);
+	public GameObject getRoot(){
+		return mRoot;
+	}
+	
+	public void addChild(GameObject go) {
+		mRoot.addChild(go);
 	}
 
-	public void removeChild(GameObject obj) {
-		children.remove(obj);
+	public void removeChild(GameObject go) {
+		mRoot.removeChild(go);
 	}
 
 	public void Update() {
-		final int size = children.size();
-		for (int i = 0; i < size; i++) {
-			children.get(i).Update();
-		}
+		mRoot.Update();
 		
 		if(mHud != null){
 			mHud.Update();
@@ -88,10 +86,7 @@ public abstract class Scene implements OnTouchListener {
 				mBackgroundColor.getAlpha());
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
 		
-		final int size = children.size();
-		for (int i = 0; i < size; i++) {
-			children.get(i).Draw(mMainCamera);
-		}
+		mRoot.Draw(mMainCamera);
 		
 		if(mHud != null){
 			mHud.Draw(mMainCamera);
@@ -110,5 +105,7 @@ public abstract class Scene implements OnTouchListener {
 
 	public abstract void onLoadResources();
 	
-	public abstract void onCreate(int width, int height);
+	public abstract void onCreate();
+	
+	public abstract void onResize(int width, int height);
 }

@@ -17,12 +17,17 @@ public class GameRenderer extends BaseGameRenderer {
 
 	@Override
 	public void onSurfaceCreated() {
+	}
+
+	@Override
+	public void onCreate() {
 		scene.onLoadResources();
+		scene.onCreate();
 	}
 
 	@Override
 	public void onChangedSurface(int width, int height) {
-		scene.onCreate(width, height);
+		scene.onResize(width, height);
 	}
 	
 	@Override
@@ -31,4 +36,5 @@ public class GameRenderer extends BaseGameRenderer {
 		scene.Draw();
 		tweenManager.update(Time.deltaTime);
 	}
+
 }

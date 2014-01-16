@@ -6,21 +6,22 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
 
+import com.CornelCocioaba.Pixti.Pixti;
 import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public abstract class BaseGameRenderer implements Renderer {
 
 	private boolean mSurfaceCreated;
-	private int mWidth;
-	private int mHeight;
 	private long mLastTime;
 	private int nbFrames;
 	private int mFPS;
 
+	volatile boolean created = false;
+	
 	public BaseGameRenderer() {
 		mSurfaceCreated = false;
-		mWidth = -1;
-		mHeight = -1;
+		Pixti.width = -1;
+		Pixti.height = -1;
 		mLastTime = System.currentTimeMillis();
 		nbFrames = 0;
 		mFPS = 60;
@@ -33,15 +34,14 @@ public abstract class BaseGameRenderer implements Renderer {
 			Log.i(Debug.TAG, "Surface created.");
 		}
 		mSurfaceCreated = true;
-		mWidth = -1;
-		mHeight = -1;
+		Pixti.width = 1000;
+		Pixti.height = 1000;
 		
-		onSurfaceCreated();
 	}
 
 	@Override
 	public void onSurfaceChanged(GL10 notUsed, int width, int height) {
-		if (!mSurfaceCreated && width == mWidth && height == mHeight) {
+		if (!mSurfaceCreated && width == Pixti.width && height == Pixti.height) {
 			if (BuildConfig.DEBUG) {
 				Log.i(Debug.TAG, "Surface changed but already handled.");
 			}
@@ -58,10 +58,16 @@ public abstract class BaseGameRenderer implements Renderer {
 			Log.i(Debug.TAG, msg);
 		}
 
-		mWidth = width;
-		mHeight = height;
+		Pixti.width = width;
+		Pixti.height = height;
+		
+		if(!created){
+			onSurfaceCreated();
+			onCreate();
+			created = true;
+		}
 
-		onChangedSurface(mWidth, mHeight);
+		onChangedSurface(width, height);
 		mSurfaceCreated = false;
 	}
 
@@ -86,6 +92,8 @@ public abstract class BaseGameRenderer implements Renderer {
 	}
 
 	public abstract void onSurfaceCreated();
+	
+	public abstract void onCreate();
 	
 	public abstract void onChangedSurface(int width, int height);
 

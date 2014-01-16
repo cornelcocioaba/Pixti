@@ -22,12 +22,15 @@ public class Projectile extends Sprite {
 		fire = true;
 	}
 	
+	public void recycle(){
+		pool.recyclePoolItem(this);
+	}
+	
 	@Override
 	public void Update() {
 		if(fire){
 			y += velocity * Time.deltaTime;
 		}
-		
-		if(y > 720) pool.recyclePoolItem(this);
+		if(y > 720) this.recycle();
 	}
 }

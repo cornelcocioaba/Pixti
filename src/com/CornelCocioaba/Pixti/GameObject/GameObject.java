@@ -3,7 +3,6 @@ package com.CornelCocioaba.Pixti.GameObject;
 import java.util.ArrayList;
 
 import com.CornelCocioaba.Pixti.Engine.Camera;
-import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public class GameObject implements IUpdateable, IDrawable {
 
@@ -30,7 +29,27 @@ public class GameObject implements IUpdateable, IDrawable {
 		this.angle = 0.0f;
 		name = getClass().getName();
 	}
+	
+	public float getX(){
+		return x;
+	}
+	
+	public float getY(){
+		return y;
+	}
 
+	public int getChildCount(){
+		return children.size();
+	}
+	
+	public GameObject getChild(int i){
+		return children.get(i);
+	}
+	
+	public ArrayList<GameObject> getChildren(){
+		return children;
+	}
+	
 	public void addChild(GameObject go) {
 		go.parent = this;
 		children.add(go);

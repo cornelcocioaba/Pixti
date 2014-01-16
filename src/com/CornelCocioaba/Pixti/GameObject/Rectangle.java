@@ -7,7 +7,7 @@ import com.CornelCocioaba.Pixti.Engine.Camera;
 import com.CornelCocioaba.Pixti.OpenGL.Color;
 import com.CornelCocioaba.Pixti.OpenGL.ColorShaderProgram;
 
-public class Rectangle extends AbstractRectangle {
+public class Rectangle extends RectangleShape {
 
 	private final ColorShaderProgram mProgram;
 	private final float[] mMVPMatrix = new float[16];

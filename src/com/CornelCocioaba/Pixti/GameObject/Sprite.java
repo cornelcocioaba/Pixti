@@ -9,7 +9,7 @@ import com.CornelCocioaba.Pixti.OpenGL.Color;
 import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
 import com.CornelCocioaba.Pixti.OpenGL.TextureShaderProgram;
 
-public class Sprite extends AbstractRectangle {
+public class Sprite extends RectangleShape {
 
 	protected final TextureShaderProgram mProgram;
 	protected final float[] mMVPMatrix = new float[16];

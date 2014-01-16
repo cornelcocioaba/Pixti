@@ -3,7 +3,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 import com.CornelCocioaba.Pixti.OpenGL.Color;
 import com.CornelCocioaba.Pixti.OpenGL.GLConstants;
 
-public abstract class AbstractRectangle extends Shape {
+public class RectangleShape extends Shape {
 
 	public float width, height;
 	public float scaleX, scaleY;
@@ -12,15 +12,15 @@ public abstract class AbstractRectangle extends Shape {
 
 	protected static short triangles[] = new short[] { 0, 1, 2, 0, 2, 3 };
 	
-	public AbstractRectangle(float x, float y, float width, float height){
+	public RectangleShape(float x, float y, float width, float height){
 		this(x, y, width, height, Color.WHITE);
 	}
 	
-	public AbstractRectangle(float x, float y, float width, float height, Color color){
+	public RectangleShape(float x, float y, float width, float height, Color color){
 		this(x, y, width, height, color, Anchor.BOTTOM_LEFT);
 	}
 	
-	public AbstractRectangle(float x, float y, float width, float height, Color color, Anchor anchor){
+	public RectangleShape(float x, float y, float width, float height, Color color, Anchor anchor){
 		this.x = x;
 		this.y = y;
 		this.width = width;
@@ -32,6 +32,14 @@ public abstract class AbstractRectangle extends Shape {
 		this.setVertices(this.getVerts(width, height, anchor));
 		this.setColor(color);
 		this.setTriangles(triangles);
+	}
+	
+	public float getWidth(){
+		return width;
+	}
+	
+	public float getHeight(){
+		return height;
 	}
 	
 	public float[] getVerts(float width, float height) {
@@ -124,5 +132,26 @@ public abstract class AbstractRectangle extends Shape {
 		TOP_CENTER, 
 		TOP_RIGHT
 	}
+	
+	public boolean collidesWith(RectangleShape other){
+		
+		//only works for middle center anchor
+		
+		float minX = x - width * 0.5f;
+		float otherMinX = other.x - other.width * 0.5f;
+		
+		float maxX = x + width * 0.5f;
+		float otherMaxX = other.x + other.width * 0.5f;
+		
+		float minY = y - height * 0.5f;
+		float otherMinY = other.y - height * 0.5f;
+		
+		float maxY =  y + height * 0.5f;;
+		float otherMaxY = other.y + height * 0.5f;
+		
+		
+		return !(maxX < otherMinX || otherMaxX < minX || maxY < otherMinY || otherMaxY < minY);
+	}
+	
 
 }

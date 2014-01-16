@@ -14,14 +14,11 @@ public class Camera {
 	private final float[] mViewMatrix = new float[16];
 	public final float[] mCombinedMatrix = new float[16];
 
-	private float mViewportWidth;
-	private float mViewportHeight;
+	private int mViewportWidth;
+	private int mViewportHeight;
+
 
 	public Camera(int viewportWidth, int viewportHeight) {
-		this((float)viewportWidth, (float)viewportHeight);
-	}
-	
-	public Camera(float viewportWidth, float viewportHeight) {
 		x = 0;
 		y = 0;
 		mViewportWidth = viewportWidth;
@@ -50,7 +47,7 @@ public class Camera {
 		Matrix.multiplyMM(mCombinedMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 	}
 
-	public void setViewport(float width, float height) {
+	public void setViewport(int width, int height) {
 		mViewportWidth = width;
 		mViewportHeight = height;
 		update();
