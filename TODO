@@ -10,11 +10,11 @@ Pixti TODO list :
 --Shader support
 --Shader Programs
 --Tween engine
+--fix timestep game loop
+--Animated Sprite
+--Touch
+--Text
 
--fix timestep game loop
--Animated Sprite
--Touch
--Text
 -Accelerometer
 -Sounds and Music
 -Particle System
