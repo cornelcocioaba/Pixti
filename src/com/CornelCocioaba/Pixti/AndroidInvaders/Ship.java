@@ -3,7 +3,6 @@ package com.CornelCocioaba.Pixti.AndroidInvaders;
 import com.CornelCocioaba.Pixti.Engine.Time;
 import com.CornelCocioaba.Pixti.GameObject.Sprite;
 import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
-import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public class Ship extends Sprite {
 
@@ -20,10 +19,18 @@ public class Ship extends Sprite {
 	private ProjectilePool projectilePool;
 
 	private float lastFireTime;
+	
+	OnFireCallback mOnFireCallback;
 
 	public Ship(float x, float y, TextureRegion textureRegion) {
+		this(x, y, textureRegion, null);
+	}
+
+	public Ship(float x, float y, TextureRegion textureRegion, OnFireCallback callback) {
 		super(x, y, textureRegion);
+		
 		this.name = Ship.NAME;
+		this.mOnFireCallback = callback;
 	}
 
 	public void setLimits(float left, float right) {
@@ -48,6 +55,11 @@ public class Ship extends Sprite {
 	}
 
 	private void fire() {
+		
+		if(mOnFireCallback != null){
+			mOnFireCallback.OnFireEvent();
+		}
+		
 		Projectile pr = projectilePool.obtainPoolItem();
 		pr.name = PROJECTILE_NAME;
 		pr.start(this.x, this.y + CENTER_GUN_OFFSET);
@@ -56,7 +68,7 @@ public class Ship extends Sprite {
 
 	@Override
 	public void Update() {
-		
+
 		x += speed * direction * Time.deltaTime;
 		x = Clamp(x, leftLimit, rightLimit);
 
@@ -76,6 +88,10 @@ public class Ship extends Sprite {
 			return max;
 
 		return value;
+	}
+
+	public interface OnFireCallback {
+		public void OnFireEvent();
 	}
 
 }
