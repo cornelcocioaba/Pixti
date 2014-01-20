@@ -1,6 +1,6 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
+import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
 
 public class AnimatedSprite extends Sprite {
 

@@ -1,6 +1,6 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import com.CornelCocioaba.Pixti.OpenGL.Color;
+import com.CornelCocioaba.Pixti.Graphics.Color;
 
 public abstract class UniformColoredShape extends Shape {
 

@@ -4,8 +4,8 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 
 import com.CornelCocioaba.Pixti.Engine.Camera;
-import com.CornelCocioaba.Pixti.OpenGL.Color;
-import com.CornelCocioaba.Pixti.OpenGL.ColorShaderProgram;
+import com.CornelCocioaba.Pixti.Graphics.Color;
+import com.CornelCocioaba.Pixti.Graphics.ColorShaderProgram;
 
 public class Rectangle extends RectangleShape {
 

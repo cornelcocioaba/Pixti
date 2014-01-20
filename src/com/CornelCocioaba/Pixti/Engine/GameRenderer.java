@@ -3,8 +3,7 @@ package com.CornelCocioaba.Pixti.Engine;
 import android.content.Context;
 import aurelienribon.tweenengine.TweenManager;
 
-import com.CornelCocioaba.Pixti.AndroidInvaders.InvadersScene;
-import com.CornelCocioaba.Pixti.GameObject.Scene;
+import com.CornelCocioaba.Pixti.Examples.AndroidInvaders.InvadersScene;
 
 public class GameRenderer extends BaseGameRenderer {
 

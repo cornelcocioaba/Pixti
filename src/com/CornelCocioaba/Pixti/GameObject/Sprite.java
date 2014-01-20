@@ -5,9 +5,9 @@ import android.opengl.Matrix;
 import android.view.MotionEvent;
 
 import com.CornelCocioaba.Pixti.Engine.Camera;
-import com.CornelCocioaba.Pixti.OpenGL.Color;
-import com.CornelCocioaba.Pixti.OpenGL.TextureRegion;
-import com.CornelCocioaba.Pixti.OpenGL.TextureShaderProgram;
+import com.CornelCocioaba.Pixti.Graphics.Color;
+import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
+import com.CornelCocioaba.Pixti.Graphics.TextureShaderProgram;
 
 public class Sprite extends RectangleShape {
 

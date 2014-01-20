@@ -1,7 +1,7 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import com.CornelCocioaba.Pixti.OpenGL.Color;
-import com.CornelCocioaba.Pixti.OpenGL.GLConstants;
+import com.CornelCocioaba.Pixti.Graphics.Color;
+import com.CornelCocioaba.Pixti.Graphics.GLConstants;
 
 public class RectangleShape extends Shape {
 
