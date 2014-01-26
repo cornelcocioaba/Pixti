@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.System;
+package com.CornelCocioaba.Pixti.Android;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -11,7 +11,9 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.CornelCocioaba.Pixti.Engine.Engine;
 import com.CornelCocioaba.Pixti.Engine.R;
+import com.CornelCocioaba.Pixti.Engine.R.menu;
 
 public class GameActivity extends Activity {
 

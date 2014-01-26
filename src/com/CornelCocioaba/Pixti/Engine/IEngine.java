@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.System;
+package com.CornelCocioaba.Pixti.Engine;
 
 public interface IEngine {
 

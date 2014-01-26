@@ -1,7 +1,8 @@
-package com.CornelCocioaba.Pixti.System;
+package com.CornelCocioaba.Pixti.Engine;
 
 import android.content.Context;
 
+import com.CornelCocioaba.Pixti.Android.GameSurfaceView;
 import com.CornelCocioaba.Pixti.Audio.MusicManager;
 import com.CornelCocioaba.Pixti.Audio.SoundManager;
 import com.CornelCocioaba.Pixti.Graphics.GameRenderer;

@@ -1,6 +1,6 @@
 package com.CornelCocioaba.Pixti.Graphics;
 
-import com.CornelCocioaba.Pixti.System.Engine;
+import com.CornelCocioaba.Pixti.Engine.Engine;
 
 public class GameRenderer extends BaseGameRenderer {
 

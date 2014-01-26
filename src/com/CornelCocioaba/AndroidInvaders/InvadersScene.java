@@ -16,6 +16,7 @@ import aurelienribon.tweenengine.TweenCallback;
 import aurelienribon.tweenengine.TweenManager;
 import aurelienribon.tweenengine.equations.Quad;
 
+import com.CornelCocioaba.Pixti.Engine.Scene;
 import com.CornelCocioaba.Pixti.GameObject.GameObject;
 import com.CornelCocioaba.Pixti.GameObject.HUD;
 import com.CornelCocioaba.Pixti.GameObject.RectangleShape.Anchor;
@@ -26,7 +27,6 @@ import com.CornelCocioaba.Pixti.Graphics.Color;
 import com.CornelCocioaba.Pixti.Graphics.Texture;
 import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
 import com.CornelCocioaba.Pixti.Graphics.Font.Font;
-import com.CornelCocioaba.Pixti.System.Scene;
 import com.CornelCocioaba.Pixti.Utils.Debug;
 import com.CornelCocioaba.Pixti.Utils.Direction;
 import com.CornelCocioaba.Pixti.Utils.Time;

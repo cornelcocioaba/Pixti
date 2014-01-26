@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.System;
+package com.CornelCocioaba.Pixti.Engine;
 
 import android.content.Context;
 import android.opengl.GLES20;
