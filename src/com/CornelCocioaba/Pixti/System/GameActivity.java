@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.System;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -11,9 +11,11 @@ import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
+import com.CornelCocioaba.Pixti.Engine.R;
+
 public class GameActivity extends Activity {
 
-	private GameSurfaceView mGameSurfaceView;
+	protected Engine mEngine;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -22,9 +24,10 @@ public class GameActivity extends Activity {
 		requestWindowFeature(Window.FEATURE_NO_TITLE);
 		getWindow().setFlags(WindowManager.LayoutParams.FLAG_FULLSCREEN, WindowManager.LayoutParams.FLAG_FULLSCREEN);
 
+		mEngine = new Engine(this);
+		
 		if (supportsGLES20()) {
-			mGameSurfaceView = new GameSurfaceView(this);
-			setContentView(mGameSurfaceView);
+			setContentView(mEngine.getSurfaceView());
 		} else {
 			Toast.makeText(this, "This device does not support OpenGL ES 2.0", Toast.LENGTH_LONG).show();
 			return;
@@ -41,13 +44,13 @@ public class GameActivity extends Activity {
 	@Override
 	protected void onPause() {
 		super.onPause();
-		mGameSurfaceView.onPause();
+		mEngine.onPause();
 	}
 
 	@Override
 	protected void onResume() {
 		super.onResume();
-		mGameSurfaceView.onResume();
+		mEngine.onResume();
 	}
 
 	private boolean supportsGLES20() {

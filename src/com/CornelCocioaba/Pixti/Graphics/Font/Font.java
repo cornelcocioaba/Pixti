@@ -17,6 +17,7 @@ import android.graphics.Typeface;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
+import com.CornelCocioaba.Pixti.GameObject.Text;
 import com.CornelCocioaba.Pixti.Graphics.Font.programs.BatchTextProgram;
 import com.CornelCocioaba.Pixti.Graphics.Font.programs.Program;
 

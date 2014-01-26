@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.Utils;
 
 public class UpdateThread extends Thread {
 

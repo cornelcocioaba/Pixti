@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.System;
 
 import android.content.Context;
 import android.opengl.GLES20;
@@ -7,14 +7,15 @@ import android.view.View;
 import android.view.View.OnTouchListener;
 import aurelienribon.tweenengine.Tween;
 
+import com.CornelCocioaba.AndroidInvaders.GameObjectAccessor;
 import com.CornelCocioaba.Pixti.GameObject.GameObject;
-import com.CornelCocioaba.Pixti.GameObject.GameObjectAccessor;
 import com.CornelCocioaba.Pixti.GameObject.HUD;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
 import com.CornelCocioaba.Pixti.Graphics.Color;
 import com.CornelCocioaba.Pixti.Utils.Debug;
 
 /*
- * The scene is the root of all GameObjects, cameras, sounds, touches etc
+ * The scene contains all GameObjects, cameras, sounds, touches etc
  * It has infinite size
  */
 
@@ -31,7 +32,7 @@ public abstract class Scene implements OnTouchListener {
 		mContext = context;
 		mRoot = new GameObject();
 		Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
-		mBackgroundColor = new Color(0.0f, 0.6f, 0.8f, 1.0f);
+		mBackgroundColor = new Color(0, 0, 0, 1);
 	}
 	
 	public void createCamera(int width, int height){
@@ -87,7 +88,6 @@ public abstract class Scene implements OnTouchListener {
 		GLES20.glClearColor(mBackgroundColor.getRed(), mBackgroundColor.getGreen(), mBackgroundColor.getBlue(),
 				mBackgroundColor.getAlpha());
 		GLES20.glClear(GLES20.GL_COLOR_BUFFER_BIT | GLES20.GL_DEPTH_BUFFER_BIT);
-		
 		mRoot.Draw(mMainCamera);
 		
 		if(mHud != null){
@@ -105,9 +105,13 @@ public abstract class Scene implements OnTouchListener {
 		return true;
 	}
 
-	public abstract void onLoadResources();
-	
 	public abstract void onCreate();
 	
 	public abstract void onResize(int width, int height);
+	
+	public abstract void onPause();
+
+    public abstract void onResume();
+
+    public abstract void onDestroy();
 }

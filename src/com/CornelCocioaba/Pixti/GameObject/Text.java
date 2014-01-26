@@ -1,9 +1,9 @@
-package com.CornelCocioaba.Pixti.Graphics.Font;
+package com.CornelCocioaba.Pixti.GameObject;
 
 import android.opengl.GLES20;
 
-import com.CornelCocioaba.Pixti.Engine.Camera;
-import com.CornelCocioaba.Pixti.GameObject.GameObject;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
+import com.CornelCocioaba.Pixti.Graphics.Font.Font;
 
 public class Text extends GameObject {
 

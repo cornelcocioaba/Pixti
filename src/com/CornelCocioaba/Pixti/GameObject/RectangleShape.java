@@ -6,8 +6,6 @@ import com.CornelCocioaba.Pixti.Graphics.GLConstants;
 public class RectangleShape extends Shape {
 
 	public float width, height;
-	public float scaleX, scaleY;
-	public float mAngle;
 	private Color mColor;
 
 	protected static short triangles[] = new short[] { 0, 1, 2, 0, 2, 3 };
@@ -27,9 +25,9 @@ public class RectangleShape extends Shape {
 		this.height = height;
 		this.scaleX = 1;
 		this.scaleY = 1;
-		this.mAngle = 0;
+		this.angle = 0;
 		this.mColor = color;
-		this.setVertices(this.getVerts(width, height, anchor));
+		this.setVertices(this.getVerts(anchor));
 		this.setColor(color);
 		this.setTriangles(triangles);
 	}
@@ -42,11 +40,15 @@ public class RectangleShape extends Shape {
 		return height;
 	}
 	
-	public float[] getVerts(float width, float height) {
+	public Color getColor(){
+		return mColor;
+	}
+	
+	public float[] getVerts() {
 		return new float[] { 0, 0, 0, height, width, height, width, 0 };
 	}
 	
-	public float[] getVerts(float width, float height, Anchor anchor) {
+	public float[] getVerts(Anchor anchor) {
 		float[] vertices;
 		switch(anchor){
 		case BOTTOM_LEFT:
@@ -85,11 +87,6 @@ public class RectangleShape extends Shape {
 	public void setColor(Color color){
 		mColor = color;
 		setColors(vertexColors(mColor));
-	}
-	
-	public void setScale(float scale){
-		this.scaleX = scale;
-		this.scaleY = scale;
 	}
 	
 	public void setGradientColor(Color from, Color to){
@@ -137,17 +134,17 @@ public class RectangleShape extends Shape {
 		
 		//only works for middle center anchor
 		
-		float minX = x - width * 0.5f;
-		float otherMinX = other.x - other.width * 0.5f;
+		float minX = getWorldX() - width * 0.5f;
+		float otherMinX = other.getWorldX() - other.width * 0.5f;
 		
-		float maxX = x + width * 0.5f;
-		float otherMaxX = other.x + other.width * 0.5f;
+		float maxX = getWorldX() + width * 0.5f;
+		float otherMaxX = other.getWorldX() + other.width * 0.5f;
 		
-		float minY = y - height * 0.5f;
-		float otherMinY = other.y - height * 0.5f;
+		float minY = getWorldY() - height * 0.5f;
+		float otherMinY = other.getWorldY() - height * 0.5f;
 		
-		float maxY =  y + height * 0.5f;;
-		float otherMaxY = other.y + height * 0.5f;
+		float maxY =  getWorldY() + height * 0.5f;
+		float otherMaxY = other.getWorldY() + height * 0.5f;
 		
 		
 		return !(maxX < otherMinX || otherMaxX < minX || maxY < otherMinY || otherMaxY < minY);

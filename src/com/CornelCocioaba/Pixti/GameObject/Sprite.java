@@ -4,7 +4,7 @@ import android.opengl.GLES20;
 import android.opengl.Matrix;
 import android.view.MotionEvent;
 
-import com.CornelCocioaba.Pixti.Engine.Camera;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
 import com.CornelCocioaba.Pixti.Graphics.Color;
 import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
 import com.CornelCocioaba.Pixti.Graphics.TextureShaderProgram;
@@ -39,16 +39,20 @@ public class Sprite extends RectangleShape {
 		mProgram.useProgram();
 
 		Matrix.setIdentityM(mMVPMatrix, 0);
-		Matrix.translateM(mMVPMatrix, 0, x, y, 0);
-		Matrix.rotateM(mMVPMatrix, 0, mAngle, 0, 0, -1.0f);
-		Matrix.scaleM(mMVPMatrix, 0, scaleX, scaleY, 0);
+		Matrix.translateM(mMVPMatrix, 0, getWorldX(), getWorldY(), 0);
+		Matrix.rotateM(mMVPMatrix, 0, getWorldRotation(), 0, 0, -1.0f);
+		Matrix.scaleM(mMVPMatrix, 0, getWorldScaleX(), getWorldScaleY(), 0);
 		Matrix.multiplyMM(mMVPMatrix, 0, cam.mCombinedMatrix, 0, mMVPMatrix, 0);
 
 		mProgram.setTextureId(mMVPMatrix, textureRegion.getTexture().textureId);
 		mProgram.setVertexBufferPointer(vertexBuffer);
-		mProgram.enablePositionAttribute();
-		mProgram.enableTextureCoordinatesAttribute();
+		mProgram.setColorBufferPointer(colorBuffer);
 		mProgram.setTextureCoordinatesPointer(textureRegion.getUvBuffer());
+		
+		mProgram.enablePositionAttribute();
+		mProgram.enableColorAttribute();
+		mProgram.enableTextureCoordinatesAttribute();
+		
 
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
@@ -59,6 +63,7 @@ public class Sprite extends RectangleShape {
 		GLES20.glDisable(GLES20.GL_BLEND);
 
 		mProgram.disablePositionAttribute();
+		mProgram.disableColorAttribute();
 		mProgram.disableTextureCoordinatesAttribute();
 		
 		super.Draw(cam);

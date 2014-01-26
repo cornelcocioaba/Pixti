@@ -3,75 +3,24 @@ package com.CornelCocioaba.Pixti.Utils;
 import android.util.Log;
 
 public class Debug {
-	public static final String TAG = "Engine";
+	public static final String TAG = "Pixti";
     public static final boolean ON = true;
     
-    public static void log(String msg){
+    public static <T> void log(T msg){
     	if(ON){
-    		Log.d(TAG, msg);
+    		Log.d(TAG, String.valueOf(msg));
     	}
     }
     
-    public static void log(short msg){
-    	log(String.valueOf(msg));
-    }
-    
-    public static void log(int msg){
-    	log(String.valueOf(msg));
-    }
-    
-    public static void log(float msg){
-    	log(String.valueOf(msg));
-    }
-    
-    public static void log(double msg){
-    	log(String.valueOf(msg));
-    }
-    
-    
-    
-    public static void logInfo(String msg){
+    public static <T> void logInfo(T msg){
     	if(ON){
-    		Log.i(TAG, msg);
+    		Log.i(TAG, String.valueOf(msg));
     	}
     }
     
-    public static void logInfo(short msg){
-    	logInfo(String.valueOf(msg));
-    }
-    
-    public static void logInfo(int msg){
-    	logInfo(String.valueOf(msg));
-    }
-    
-    public static void logInfo(float msg){
-    	logInfo(String.valueOf(msg));
-    }
-    
-    public static void logInfo(double msg){
-    	logInfo(String.valueOf(msg));
-    }
-    
-    
-    public static void logError(String msg){
+    public static <T> void logError(T msg){
     	if(ON){
-    		Log.e(TAG, msg);
+    		Log.e(TAG, String.valueOf(msg));
     	}
-    }
-    
-    public static void logError(short msg){
-    	logError(String.valueOf(msg));
-    }
-    
-    public static void logError(int msg){
-    	logError(String.valueOf(msg));
-    }
-    
-    public static void logError(float msg){
-    	logError(String.valueOf(msg));
-    }
-    
-    public static void logError(double msg){
-    	logError(String.valueOf(msg));
     }
 }

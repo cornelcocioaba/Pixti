@@ -3,7 +3,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 import android.opengl.GLES20;
 import android.opengl.Matrix;
 
-import com.CornelCocioaba.Pixti.Engine.Camera;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
 import com.CornelCocioaba.Pixti.Graphics.Color;
 import com.CornelCocioaba.Pixti.Graphics.ColorShaderProgram;
 
@@ -27,7 +27,7 @@ public class Rectangle extends RectangleShape {
 
 		Matrix.setIdentityM(mMVPMatrix, 0);
 		Matrix.translateM(mMVPMatrix, 0, x, y, 0);
-		Matrix.rotateM(mMVPMatrix, 0, mAngle, 0, 0, -1.0f);
+		Matrix.rotateM(mMVPMatrix, 0, angle, 0, 0, -1.0f);
 		Matrix.scaleM(mMVPMatrix, 0, scaleX, scaleY, 0);
 		Matrix.multiplyMM(mMVPMatrix, 0, cam.mCombinedMatrix, 0, mMVPMatrix, 0);
 

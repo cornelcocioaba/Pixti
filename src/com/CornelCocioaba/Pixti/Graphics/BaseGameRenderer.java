@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.Graphics;
 
 import javax.microedition.khronos.egl.EGLConfig;
 import javax.microedition.khronos.opengles.GL10;
@@ -6,22 +6,21 @@ import javax.microedition.khronos.opengles.GL10;
 import android.opengl.GLSurfaceView.Renderer;
 import android.util.Log;
 
-import com.CornelCocioaba.Pixti.Pixti;
+import com.CornelCocioaba.Pixti.Engine.BuildConfig;
 import com.CornelCocioaba.Pixti.Utils.Debug;
+import com.CornelCocioaba.Pixti.Utils.Time;
 
 public abstract class BaseGameRenderer implements Renderer {
 
 	private boolean mSurfaceCreated;
+	private int mWidth;
+	private int mHeight;
 	private long mLastTime;
 	private int nbFrames;
 	private int mFPS;
 
-	volatile boolean created = false;
-	
 	public BaseGameRenderer() {
 		mSurfaceCreated = false;
-		Pixti.width = -1;
-		Pixti.height = -1;
 		mLastTime = System.currentTimeMillis();
 		nbFrames = 0;
 		mFPS = 60;
@@ -34,14 +33,11 @@ public abstract class BaseGameRenderer implements Renderer {
 			Log.i(Debug.TAG, "Surface created.");
 		}
 		mSurfaceCreated = true;
-		Pixti.width = 1000;
-		Pixti.height = 1000;
-		
 	}
 
 	@Override
 	public void onSurfaceChanged(GL10 notUsed, int width, int height) {
-		if (!mSurfaceCreated && width == Pixti.width && height == Pixti.height) {
+		if (!mSurfaceCreated && width == mWidth && height == mHeight) {
 			if (BuildConfig.DEBUG) {
 				Log.i(Debug.TAG, "Surface changed but already handled.");
 			}
@@ -58,24 +54,15 @@ public abstract class BaseGameRenderer implements Renderer {
 			Log.i(Debug.TAG, msg);
 		}
 
-		Pixti.width = width;
-		Pixti.height = height;
-		
-		if(!created){
-			onSurfaceCreated();
-			onCreate();
-			created = true;
-		}
+		mWidth = width;
+		mHeight = height;
 
-		onChangedSurface(width, height);
+		onChangedSurface(width, height, mSurfaceCreated);
 		mSurfaceCreated = false;
 	}
 
 	@Override
 	public void onDrawFrame(GL10 notUsed) {
-
-		Time.Update();
-		
 		if (BuildConfig.DEBUG) {
 			nbFrames++;
 			long currentTime = System.currentTimeMillis();
@@ -87,15 +74,12 @@ public abstract class BaseGameRenderer implements Renderer {
 		}
 		onDrawFrame();
 	}
+
 	public int getFPS() {
 		return mFPS;
 	}
 
-	public abstract void onSurfaceCreated();
-	
-	public abstract void onCreate();
-	
-	public abstract void onChangedSurface(int width, int height);
+	public abstract void onChangedSurface(int width, int height, boolean contextLost);
 
 	public abstract void onDrawFrame();
 }

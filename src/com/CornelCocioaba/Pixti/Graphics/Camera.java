@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.Graphics;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;

@@ -2,12 +2,16 @@ package com.CornelCocioaba.Pixti.Graphics;
 
 public class Color {
 
-	public static Color WHITE = new Color(1.0f, 1.0f, 1.0f, 1.0f);
-	public static Color BLACK = new Color(0.0f, 0.0f, 0.0f, 1.0f);
-	public static Color RED = new Color(1.0f, 0.0f, 0.0f, 1.0f);
-	public static Color GREEN = new Color(0.0f, 1.0f, 0.0f, 1.0f);
-	public static Color BLUE = new Color(0.0f, 0.0f, 1.0f, 1.0f);
-	public static Color YELLOW = new Color(1.0f, 1.0f, 0.0f, 0.0f);
+	public static final Color WHITE = new Color(1, 1, 1, 1);
+	public static final Color BLACK = new Color(0, 0, 0, 1);
+	public static final Color RED = new Color(1, 0, 0, 1);
+	public static final Color YELLOW = new Color(1, 1, 0, 1);
+	public static final Color GREEN = new Color(0, 1, 0, 1);
+	public static final Color CYAN = new Color(0, 1, 1, 1);
+	public static final Color BLUE = new Color(0, 0, 1, 1);
+	public static final Color PINK = new Color(1, 0, 1, 1);
+	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+	public static final Color SEMITRANSPARENT = new Color(1, 1, 1, 0.5f);
 
 	private float mRed;
 	private float mGreen;
@@ -53,12 +57,12 @@ public class Color {
 		this.mAlpha = mAlpha;
 	}
 
-	public float[] getColorAsFloatArray(){
+	public float[] getColorAsFloatArray() {
 		return new float[] { mRed, mGreen, mBlue, mAlpha };
 	}
-	
+
 	public static float[] getColorAsFloatArray(Color color) {
 		return color.getColorAsFloatArray();
 	}
-	
+
 }

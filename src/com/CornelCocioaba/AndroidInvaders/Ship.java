@@ -1,12 +1,13 @@
-package com.CornelCocioaba.Pixti.Examples.AndroidInvaders;
+package com.CornelCocioaba.AndroidInvaders;
 
-import com.CornelCocioaba.Pixti.Engine.Time;
 import com.CornelCocioaba.Pixti.GameObject.Sprite;
 import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
+import com.CornelCocioaba.Pixti.Utils.Time;
+import com.CornelCocioaba.Pixti.Utils.Math.Mathf;
 
 public class Ship extends Sprite {
 
-	private static int CENTER_GUN_OFFSET = 41;
+	public static int CENTER_GUN_OFFSET = 41;
 	public static final String NAME = "Andromeda";
 	public static final String PROJECTILE_NAME = "ShipProjectile";
 
@@ -16,21 +17,21 @@ public class Ship extends Sprite {
 	private float leftLimit;
 	private float rightLimit;
 
-	private ProjectilePool projectilePool;
-
 	private float lastFireTime;
 	
-	OnFireCallback mOnFireCallback;
+	IOnFireEvent mOnFireCallback;
+	public boolean invulnerable;
 
 	public Ship(float x, float y, TextureRegion textureRegion) {
 		this(x, y, textureRegion, null);
 	}
 
-	public Ship(float x, float y, TextureRegion textureRegion, OnFireCallback callback) {
+	public Ship(float x, float y, TextureRegion textureRegion, IOnFireEvent callback) {
 		super(x, y, textureRegion);
 		
 		this.name = Ship.NAME;
 		this.mOnFireCallback = callback;
+		this.invulnerable = false;
 	}
 
 	public void setLimits(float left, float right) {
@@ -38,9 +39,6 @@ public class Ship extends Sprite {
 		this.rightLimit = right;
 	}
 
-	public void createPool(Projectile prototype) {
-		projectilePool = new ProjectilePool(prototype, 10);
-	}
 
 	public void moveLeft() {
 		direction = -1;
@@ -57,41 +55,20 @@ public class Ship extends Sprite {
 	private void fire() {
 		
 		if(mOnFireCallback != null){
-			mOnFireCallback.OnFireEvent();
+			mOnFireCallback.OnFireEvent(this);
 		}
-		
-		Projectile pr = projectilePool.obtainPoolItem();
-		pr.name = PROJECTILE_NAME;
-		pr.start(this.x, this.y + CENTER_GUN_OFFSET);
-		this.addChild(pr);
 	}
 
 	@Override
 	public void Update() {
 
 		x += speed * direction * Time.deltaTime;
-		x = Clamp(x, leftLimit, rightLimit);
+		x = Mathf.Clamp(x, leftLimit, rightLimit);
 
 		if (Time.time - lastFireTime > 0.7f) {
 			lastFireTime = Time.time;
 			fire();
 		}
-
-		super.Update();
-	}
-
-	float Clamp(float value, float min, float max) {
-		if (value < min)
-			return min;
-
-		if (value > max)
-			return max;
-
-		return value;
-	}
-
-	public interface OnFireCallback {
-		public void OnFireEvent();
 	}
 
 }

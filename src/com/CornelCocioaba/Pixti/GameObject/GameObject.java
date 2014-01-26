@@ -2,7 +2,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 
 import java.util.ArrayList;
 
-import com.CornelCocioaba.Pixti.Engine.Camera;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
 
 public class GameObject implements IUpdateable, IDrawable {
 
@@ -29,27 +29,77 @@ public class GameObject implements IUpdateable, IDrawable {
 		this.angle = 0.0f;
 		name = getClass().getName();
 	}
+
+	public GameObject getParent(){
+		return parent;
+	}
 	
-	public float getX(){
+	public float getX() {
 		return x;
 	}
-	
-	public float getY(){
+
+	public float getY() {
 		return y;
 	}
+	
+	public float getWorldX() {
+		float worldX = x;
+		if (parent != null)
+			worldX += parent.getWorldX();
 
-	public int getChildCount(){
+		return worldX;
+	}
+	
+	public float getWorldY() {
+		float worldY = y;
+		if (parent != null)
+			worldY += parent.getWorldY();
+
+		return worldY;
+	}
+	
+	public float getWorldScaleX(){
+		float worldScaleX = scaleX;
+		if (parent != null)
+			worldScaleX *= parent.getWorldScaleX();
+
+		return worldScaleX;
+	}
+	
+	public float getWorldScaleY(){
+		float worldScaleY = scaleY;
+		if (parent != null)
+			worldScaleY *= parent.getWorldScaleY();
+
+		return worldScaleY;
+	}
+	
+	public float getWorldRotation(){
+		float worldRotation = angle;
+		if (parent != null)
+			worldRotation += parent.getWorldRotation();
+
+		return worldRotation;
+	}
+	
+
+	public int getChildCount() {
 		return children.size();
 	}
-	
-	public GameObject getChild(int i){
+
+	public GameObject getChild(int i) {
 		return children.get(i);
 	}
-	
-	public ArrayList<GameObject> getChildren(){
+
+	public ArrayList<GameObject> getChildren() {
 		return children;
 	}
 	
+	public void setScale(float scale){
+		this.scaleX = scale;
+		this.scaleY = scale;
+	}
+
 	public void addChild(GameObject go) {
 		go.parent = this;
 		children.add(go);
@@ -80,7 +130,7 @@ public class GameObject implements IUpdateable, IDrawable {
 
 	@Override
 	public void Update() {
-		for (int i = 0; i <  children.size(); i++) {
+		for (int i = 0; i < children.size(); i++) {
 			children.get(i).Update();
 		}
 	}

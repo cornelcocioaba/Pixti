@@ -1,6 +1,8 @@
-package com.CornelCocioaba.Pixti.GameObject;
+package com.CornelCocioaba.AndroidInvaders;
 
 import aurelienribon.tweenengine.TweenAccessor;
+
+import com.CornelCocioaba.Pixti.GameObject.GameObject;
 
 public class GameObjectAccessor implements TweenAccessor<GameObject>{
 	public static final int POSITION_X = 1;

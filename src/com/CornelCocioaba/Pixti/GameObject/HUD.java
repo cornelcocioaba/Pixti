@@ -1,6 +1,6 @@
 package com.CornelCocioaba.Pixti.GameObject;
 
-import com.CornelCocioaba.Pixti.Engine.Camera;
+import com.CornelCocioaba.Pixti.Graphics.Camera;
 
 public class HUD extends GameObject {
 
