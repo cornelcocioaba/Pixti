@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Utils;
+package com.CornelCocioaba.Pixti.Core;
 
 
 public class Time 
@@ -64,8 +64,8 @@ public class Time
 	{
 		final float newTime = System.nanoTime() * Time.SECONDS_PER_NANOSECOND;
 		
-        deltaTime = newTime - time;
+        deltaTime = (newTime - time) * timeScale;
 
-        time = newTime;
+        time += deltaTime;
 	}
 }

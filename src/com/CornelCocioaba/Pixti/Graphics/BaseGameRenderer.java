@@ -8,23 +8,16 @@ import android.util.Log;
 
 import com.CornelCocioaba.Pixti.Engine.BuildConfig;
 import com.CornelCocioaba.Pixti.Utils.Debug;
-import com.CornelCocioaba.Pixti.Utils.Time;
 
 public abstract class BaseGameRenderer implements Renderer {
 
 	private boolean mSurfaceCreated;
 	private int mWidth;
 	private int mHeight;
-	private long mLastTime;
-	private int nbFrames;
-	private int mFPS;
+
 
 	public BaseGameRenderer() {
 		mSurfaceCreated = false;
-		mLastTime = System.currentTimeMillis();
-		nbFrames = 0;
-		mFPS = 60;
-		Time.Init();
 	}
 
 	@Override
@@ -63,20 +56,7 @@ public abstract class BaseGameRenderer implements Renderer {
 
 	@Override
 	public void onDrawFrame(GL10 notUsed) {
-		if (BuildConfig.DEBUG) {
-			nbFrames++;
-			long currentTime = System.currentTimeMillis();
-			if (currentTime - mLastTime >= 1000) {
-				mFPS = nbFrames;
-				nbFrames = 0;
-				mLastTime = currentTime;
-			}
-		}
 		onDrawFrame();
-	}
-
-	public int getFPS() {
-		return mFPS;
 	}
 
 	public abstract void onChangedSurface(int width, int height, boolean contextLost);

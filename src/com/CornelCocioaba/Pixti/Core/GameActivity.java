@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Android;
+package com.CornelCocioaba.Pixti.Core;
 
 import android.app.Activity;
 import android.app.ActivityManager;
@@ -6,18 +6,14 @@ import android.content.Context;
 import android.content.pm.ConfigurationInfo;
 import android.os.Build;
 import android.os.Bundle;
-import android.view.Menu;
 import android.view.Window;
 import android.view.WindowManager;
 import android.widget.Toast;
 
-import com.CornelCocioaba.Pixti.Engine.Engine;
-import com.CornelCocioaba.Pixti.Engine.R;
-import com.CornelCocioaba.Pixti.Engine.R.menu;
 
 public class GameActivity extends Activity {
 
-	protected Engine mEngine;
+	protected IEngine mEngine;
 
 	@Override
 	protected void onCreate(Bundle savedInstanceState) {
@@ -37,16 +33,13 @@ public class GameActivity extends Activity {
 	}
 
 	@Override
-	public boolean onCreateOptionsMenu(Menu menu) {
-		// Inflate the menu; this adds items to the action bar if it is present.
-		getMenuInflater().inflate(R.menu.first_open_gl, menu);
-		return true;
-	}
-
-	@Override
 	protected void onPause() {
 		super.onPause();
 		mEngine.onPause();
+		
+		if (isFinishing()) {
+			mEngine.onDestroy();
+        }
 	}
 
 	@Override

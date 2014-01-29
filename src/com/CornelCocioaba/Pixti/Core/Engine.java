@@ -1,19 +1,18 @@
-package com.CornelCocioaba.Pixti.Engine;
+package com.CornelCocioaba.Pixti.Core;
 
 import android.content.Context;
 
-import com.CornelCocioaba.Pixti.Android.GameSurfaceView;
 import com.CornelCocioaba.Pixti.Audio.MusicManager;
 import com.CornelCocioaba.Pixti.Audio.SoundManager;
 import com.CornelCocioaba.Pixti.Graphics.GameRenderer;
 import com.CornelCocioaba.Pixti.Graphics.TextureManager;
-import com.CornelCocioaba.Pixti.Utils.Time;
 
 public class Engine implements IEngine {
 
 	private final TextureManager mTextureManager;
 	private final SoundManager mSoundManager;
 	private final MusicManager mMusicManager;
+//	private final FontManager mFontManager;
 
 	// the current scene
 	private Scene mScene;
@@ -21,25 +20,24 @@ public class Engine implements IEngine {
 	private GameSurfaceView mGameView;
 	private GameRenderer mRenderer;
 
-	// private Context mContext;
+	 private Context mContext;
 
 	public Engine(Context context) {
-		// this.mContext = context;
+		 this.mContext = context;
 
 		mTextureManager = new TextureManager();
 		mSoundManager = new SoundManager();
 		mMusicManager = new MusicManager();
 
-		mGameView = new GameSurfaceView(context);
 		mRenderer = new GameRenderer(this);
-		mGameView.setRenderer(mRenderer);
+		mGameView = new GameSurfaceView(context, mRenderer);
 		mGameView.setOnTouchListener(mScene);
 	}
 
 	// --------------------
 	// Setters and getters
 	// --------------------
-
+	@Override
 	public GameSurfaceView getSurfaceView() {
 		return mGameView;
 	}
@@ -54,22 +52,20 @@ public class Engine implements IEngine {
 	}
 
 	@Override
-	public void onSurfaceCreated() {
-		// load resources here
-		
+	public void onCreated() {
 		Time.Init();
 		mScene.onCreate();
 	}
 
 	@Override
-	public void onSurfaceResized(int width, int height) {
+	public void onResized(int width, int height) {
 		if (mScene != null) {
 			mScene.onResize(width, height);
 		}
 	}
 
 	@Override
-	public void OnDrawFrame() {
+	public void onDrawFrame() {
 		Time.Update();
 		mScene.Update();
 		mScene.Draw();

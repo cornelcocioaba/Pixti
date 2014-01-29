@@ -2,7 +2,7 @@ package com.CornelCocioaba.AndroidInvaders;
 
 import android.os.Bundle;
 
-import com.CornelCocioaba.Pixti.Android.GameActivity;
+import com.CornelCocioaba.Pixti.Core.GameActivity;
 
 public class InvadersActivity extends GameActivity {
 

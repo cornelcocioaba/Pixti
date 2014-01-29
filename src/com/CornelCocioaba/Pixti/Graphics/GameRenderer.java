@@ -1,6 +1,6 @@
 package com.CornelCocioaba.Pixti.Graphics;
 
-import com.CornelCocioaba.Pixti.Engine.Engine;
+import com.CornelCocioaba.Pixti.Core.Engine;
 
 public class GameRenderer extends BaseGameRenderer {
 
@@ -12,15 +12,15 @@ public class GameRenderer extends BaseGameRenderer {
 
 	@Override
 	public void onDrawFrame() {
-		mEngine.OnDrawFrame();
+		mEngine.onDrawFrame();
 	}
 
 	@Override
 	public void onChangedSurface(int width, int height, boolean contextLost) {
 		if(contextLost){
-			mEngine.onSurfaceCreated();
+			mEngine.onCreated();
 		}else{
-			mEngine.onSurfaceResized(width, height);
+			mEngine.onResized(width, height);
 		}
 	}
 }

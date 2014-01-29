@@ -1,9 +1,9 @@
 package com.CornelCocioaba.AndroidInvaders;
 
+import com.CornelCocioaba.Pixti.Core.Time;
 import com.CornelCocioaba.Pixti.GameObject.Sprite;
 import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
 import com.CornelCocioaba.Pixti.Utils.Direction;
-import com.CornelCocioaba.Pixti.Utils.Time;
 
 public class Projectile extends Sprite {
 
