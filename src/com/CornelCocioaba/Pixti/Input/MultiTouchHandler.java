@@ -11,20 +11,36 @@ import com.CornelCocioaba.Pixti.Utils.Pool.Pool;
 
 public class MultiTouchHandler implements TouchHandler {
 	private static final int MAX_TOUCHPOINTS = 10;
-	
+
 	private boolean[] isTouched = new boolean[MAX_TOUCHPOINTS];
 	private int[] touchX = new int[MAX_TOUCHPOINTS];
 	private int[] touchY = new int[MAX_TOUCHPOINTS];
-	
+
 	private Pool<TouchEvent> touchEventPool;
-	
+
 	private List<TouchEvent> touchEvents = new ArrayList<TouchEvent>();
 	private List<TouchEvent> touchEventsBuffer = new ArrayList<TouchEvent>();
-	
+
 	private float scaleX;
-	private float scaleY; 
+	private float scaleY;
+
+	/**
+	 * Use this constructor when you are registering the touch listener yourself
+	 * Use View.setOnTouchListener(your instance of MultiTouchHandler)
+	 */
+	public MultiTouchHandler() {
+		this(null);
+	}
+
+	public MultiTouchHandler(View view) {
+		this(view, 1, 1);
+	}
 
 	public MultiTouchHandler(View view, float scaleX, float scaleY) {
+		if (view != null) {
+			view.setOnTouchListener(this);
+		}
+
 		IPoolObjectFactory<TouchEvent> factory = new IPoolObjectFactory<TouchEvent>() {
 			@Override
 			public TouchEvent createObject() {
@@ -32,7 +48,6 @@ public class MultiTouchHandler implements TouchHandler {
 			}
 		};
 		touchEventPool = new Pool<TouchEvent>(factory, 100);
-		view.setOnTouchListener(this);
 
 		this.scaleX = scaleX;
 		this.scaleY = scaleY;
@@ -125,7 +140,7 @@ public class MultiTouchHandler implements TouchHandler {
 		synchronized (this) {
 			int len = touchEvents.size();
 			for (int i = 0; i < len; i++)
-				touchEventPool.free(touchEvents.get(i));
+				touchEventPool.recycle(touchEvents.get(i));
 			touchEvents.clear();
 			touchEvents.addAll(touchEventsBuffer);
 			touchEventsBuffer.clear();
