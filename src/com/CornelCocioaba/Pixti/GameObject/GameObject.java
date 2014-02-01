@@ -13,7 +13,7 @@ public class GameObject implements IUpdateable, IDrawable {
 	protected ArrayList<GameObject> children = new ArrayList<GameObject>();
 
 	public float x, y;
-	public float width, height;
+	//public float width, height;
 	public float scaleX = 1.0f, scaleY = 1.0f;
 	public float angle;
 

@@ -17,10 +17,10 @@ public class Camera {
 	private int mViewportWidth;
 	private int mViewportHeight;
 
-
 	public Camera(int viewportWidth, int viewportHeight) {
 		x = 0;
 		y = 0;
+		zoom = 2f;
 		mViewportWidth = viewportWidth;
 		mViewportHeight = viewportHeight;
 		update();
@@ -31,19 +31,14 @@ public class Camera {
 	 */
 	private void update() {
 		GLES20.glViewport(0, 0, (int) mViewportWidth, (int) mViewportHeight);
-		
-		Matrix.setIdentityM(mProjectionMatrix, 0);
-		Matrix.setIdentityM(mViewMatrix, 0);
-		Matrix.setIdentityM(mCombinedMatrix, 0);
 
-		Matrix.orthoM(mProjectionMatrix, 0, 0f, mViewportWidth, 0f, mViewportHeight, 0, 50);
+		Matrix.orthoM(mProjectionMatrix, 0, 0f, zoom * mViewportWidth, 0f, zoom * mViewportHeight, 0, 50);
 
-		Matrix.setLookAtM(mViewMatrix, 0,
-				x, y, 1f,  		//eye position
-				x, y, -1f, 	//center position
-				0f, 1.0f, 0.0f 	//up
-				); 
-		
+		Matrix.setLookAtM(mViewMatrix, 0, x, y, 1f, // eye position
+				x, y, -1f, // center position
+				0f, 1.0f, 0.0f // up
+		);
+
 		Matrix.multiplyMM(mCombinedMatrix, 0, mProjectionMatrix, 0, mViewMatrix, 0);
 	}
 
@@ -60,19 +55,18 @@ public class Camera {
 	public float getViewportHeight() {
 		return mViewportHeight;
 	}
-	
-	public void setPosition(float x, float y){
+
+	public void setPosition(float x, float y) {
 		this.x = x;
 		this.y = y;
-		
+
 		update();
 	}
-	
-	public void translate(float deltaX, float deltaY)
-	{
+
+	public void translate(float deltaX, float deltaY) {
 		x += deltaX;
 		y += deltaY;
-		
+
 		update();
 	}
 }

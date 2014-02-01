@@ -35,14 +35,6 @@ public class Texture {
 	public Bitmap mBitmap;
 	public int textureId;
 	
-	public static class TexParams {
-		public int TEXTURE_TYPE = GL_TEXTURE_2D;
-		public int MIN_FILTER = GL_NEAREST;
-		public int MAX_FILTER = GL_LINEAR;
-		public int WRAP_S = GL_REPEAT;
-		public int WRAP_T = GL_REPEAT;
-	}
-
 	public Texture(Context context, int resourceId) {
 
 		BitmapFactory.Options options = new BitmapFactory.Options();
@@ -72,6 +64,8 @@ public class Texture {
 		mWidth = mBitmap.getWidth();
 		mHeight = mBitmap.getHeight();
 	}
+	
+	
 
 	public int load() {
 		final int[] textureObjectIds = new int[1];

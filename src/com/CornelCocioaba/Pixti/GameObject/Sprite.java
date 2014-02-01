@@ -68,11 +68,4 @@ public class Sprite extends RectangleShape {
 		
 		super.Draw(cam);
 	}
-
-	public boolean onTouchEvent(MotionEvent event) {
-		this.x = event.getX();
-		this.y = 720 - event.getY();
-		return true;
-	}
-
 }

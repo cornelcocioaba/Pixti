@@ -56,6 +56,7 @@ public class Time
 	
 	public static void Init(){
 		time = System.nanoTime() * Time.SECONDS_PER_NANOSECOND;
+		timeScale = 1f;
 	}
 	/*
 	 * this should only be called in onDraw
