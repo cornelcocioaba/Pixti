@@ -20,7 +20,7 @@ public class Camera {
 	public Camera(int viewportWidth, int viewportHeight) {
 		x = 0;
 		y = 0;
-		zoom = 2f;
+		zoom = 1f;
 		mViewportWidth = viewportWidth;
 		mViewportHeight = viewportHeight;
 		update();

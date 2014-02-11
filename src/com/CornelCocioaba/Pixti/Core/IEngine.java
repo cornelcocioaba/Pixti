@@ -2,6 +2,7 @@ package com.CornelCocioaba.Pixti.Core;
 
 public interface IEngine {
 
+	public void setStartScene(Scene scene);
 	public void setCurrentScene(Scene scene);
 	
 	public GameSurfaceView getSurfaceView();

@@ -10,7 +10,7 @@ public class Color {
 	public static final Color CYAN = new Color(0, 1, 1, 1);
 	public static final Color BLUE = new Color(0, 0, 1, 1);
 	public static final Color PINK = new Color(1, 0, 1, 1);
-	public static final Color TRANSPARENT = new Color(0, 0, 0, 0);
+	public static final Color TRANSPARENT = new Color(1, 1, 1, 0);
 	public static final Color SEMITRANSPARENT = new Color(1, 1, 1, 0.5f);
 
 	private float mRed;

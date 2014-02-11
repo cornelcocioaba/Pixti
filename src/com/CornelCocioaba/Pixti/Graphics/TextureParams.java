@@ -1,37 +1,25 @@
 package com.CornelCocioaba.Pixti.Graphics;
 
+import static android.opengl.GLES20.GL_CLAMP_TO_EDGE;
 import static android.opengl.GLES20.GL_LINEAR;
-import static android.opengl.GLES20.GL_NEAREST;
-import static android.opengl.GLES20.GL_REPEAT;
-import static android.opengl.GLES20.GL_TEXTURE_2D;
 
 public class TextureParams {
-	public int mTextureType;
 	public int mMinFilter;
 	public int mMaxFilter;
 	public int mWrapS;
 	public int mWrapT;
 
 	public TextureParams() {
-		this(GL_TEXTURE_2D, GL_NEAREST, GL_LINEAR, GL_REPEAT, GL_REPEAT);
+		this(GL_LINEAR, GL_LINEAR, GL_CLAMP_TO_EDGE, GL_CLAMP_TO_EDGE);
 	}
 
-	public TextureParams(int type, int min, int max, int wrap_s, int wrap_t) {
-		mTextureType = type;
+	public TextureParams(int min, int max, int wrap_s, int wrap_t) {
 		mMinFilter = min;
 		mMaxFilter = max;
 		mWrapS = wrap_s;
 		mWrapT = wrap_t;
 	}
 	
-	public int getTextureType() {
-		return mTextureType;
-	}
-
-	public void setTextureType(int textureType) {
-		this.mTextureType = textureType;
-	}
-
 	public int getMinFilter() {
 		return mMinFilter;
 	}

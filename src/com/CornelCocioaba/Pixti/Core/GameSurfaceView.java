@@ -7,7 +7,6 @@ import com.CornelCocioaba.Pixti.Graphics.GameRenderer;
 
 public class GameSurfaceView extends GLSurfaceView {
 
-	
 	public GameSurfaceView(Context context, GameRenderer renderer) {
 		super(context);
 
@@ -16,12 +15,12 @@ public class GameSurfaceView extends GLSurfaceView {
 		setRenderer(renderer);
 	}
 	
-	@Override
-	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
-
-		final int specWidth = MeasureSpec.getSize(widthMeasureSpec);
-        final int specHeight = MeasureSpec.getSize(heightMeasureSpec);
-
-		setMeasuredDimension(specWidth, specHeight);
-	}
+//	@Override
+//	protected void onMeasure(int widthMeasureSpec, int heightMeasureSpec) {
+//
+//		final int specWidth = MeasureSpec.getSize(widthMeasureSpec);
+//        final int specHeight = MeasureSpec.getSize(heightMeasureSpec);
+//
+//		setMeasuredDimension(specWidth, specHeight);
+//	}
 }

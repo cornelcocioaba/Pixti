@@ -2,10 +2,10 @@ package com.CornelCocioaba.Pixti.GameObject;
 
 import android.opengl.GLES20;
 import android.opengl.Matrix;
-import android.view.MotionEvent;
 
 import com.CornelCocioaba.Pixti.Graphics.Camera;
 import com.CornelCocioaba.Pixti.Graphics.Color;
+import com.CornelCocioaba.Pixti.Graphics.Texture;
 import com.CornelCocioaba.Pixti.Graphics.TextureRegion;
 import com.CornelCocioaba.Pixti.Graphics.TextureShaderProgram;
 
@@ -15,7 +15,11 @@ public class Sprite extends RectangleShape {
 	protected final float[] mMVPMatrix = new float[16];
 	protected TextureRegion textureRegion;
 
-	public Sprite(float x, float y,TextureRegion textureRegion) {
+	public Sprite(float x, float y, Texture texture){
+		this(x, y, new TextureRegion(texture));
+	}
+	
+	public Sprite(float x, float y, TextureRegion textureRegion) {
 		this(x, y, textureRegion.getWidth(), textureRegion.getHeight(), textureRegion);
 	}
 
@@ -34,6 +38,10 @@ public class Sprite extends RectangleShape {
 		return textureRegion;
 	}
 
+	public void setTextureRegion(TextureRegion tr){
+		textureRegion = tr;
+	}
+	
 	@Override
 	public void Draw(Camera cam) {
 		mProgram.useProgram();
@@ -48,11 +56,10 @@ public class Sprite extends RectangleShape {
 		mProgram.setVertexBufferPointer(vertexBuffer);
 		mProgram.setColorBufferPointer(colorBuffer);
 		mProgram.setTextureCoordinatesPointer(textureRegion.getUvBuffer());
-		
+
 		mProgram.enablePositionAttribute();
 		mProgram.enableColorAttribute();
 		mProgram.enableTextureCoordinatesAttribute();
-		
 
 		GLES20.glEnable(GLES20.GL_BLEND);
 		GLES20.glBlendFunc(GLES20.GL_SRC_ALPHA, GLES20.GL_ONE_MINUS_SRC_ALPHA);
@@ -65,7 +72,7 @@ public class Sprite extends RectangleShape {
 		mProgram.disablePositionAttribute();
 		mProgram.disableColorAttribute();
 		mProgram.disableTextureCoordinatesAttribute();
-		
+
 		super.Draw(cam);
 	}
 }

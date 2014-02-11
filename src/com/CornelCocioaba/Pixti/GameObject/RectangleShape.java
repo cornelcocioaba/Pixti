@@ -2,6 +2,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 
 import com.CornelCocioaba.Pixti.Graphics.Color;
 import com.CornelCocioaba.Pixti.Graphics.GLConstants;
+import com.CornelCocioaba.Pixti.Utils.Debug;
 
 public class RectangleShape extends Shape {
 
@@ -150,5 +151,18 @@ public class RectangleShape extends Shape {
 		return !(maxX < otherMinX || otherMaxX < minX || maxY < otherMinY || otherMaxY < minY);
 	}
 	
+	public boolean containsPoint(float x, float y){
+		final float worldX =  getWorldX();
+		final float worldY =  getWorldY();
+		
+		float minX = worldX - width * 0.5f * scaleX;
+		float maxX = worldX + width * 0.5f * scaleX;
+		float minY = worldY - height * 0.5f * scaleY;
+		float maxY =  worldY + height * 0.5f * scaleY;
+		
+		//Debug.log(this.getClass().getName() + ": " +minX + " " + maxX + " " + minY + " " + maxY+ " " + x + " " + y);
+		
+		return minX <= x && maxX >= x && minY <= y && maxY >= y;
+	}
 
 }

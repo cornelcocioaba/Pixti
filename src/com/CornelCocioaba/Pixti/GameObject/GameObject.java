@@ -122,8 +122,7 @@ public class GameObject implements IUpdateable, IDrawable {
 
 	@Override
 	public void Draw(Camera cam) {
-		final int size = children.size();
-		for (int i = 0; i < size; i++) {
+		for (int i = 0; i < children.size(); i++) {
 			children.get(i).Draw(cam);
 		}
 	}

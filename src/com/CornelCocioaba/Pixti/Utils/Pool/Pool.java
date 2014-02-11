@@ -4,30 +4,30 @@ import java.util.ArrayList;
 import java.util.List;
 
 public class Pool<T> {
-	private final List<T> freeObjects;
+	private final List<T> recycledObjects;
 	private final IPoolObjectFactory<T> factory;
 	private final int maxSize;
 	
 	public Pool(IPoolObjectFactory<T> factory, int maxSize){
 		this.factory = factory;
 		this.maxSize = maxSize;
-		this.freeObjects = new ArrayList<T>(maxSize);
+		this.recycledObjects = new ArrayList<T>(maxSize);
 	}
 	
 	public T newObject(){
 		T object = null;
-		if(freeObjects.isEmpty()){
+		if(recycledObjects.isEmpty()){
 			object = factory.createObject();
 		}else{
-			object = freeObjects.remove(freeObjects.size() - 1);
+			object = recycledObjects.remove(recycledObjects.size() - 1);
 		}
 		
 		return object;
 	}
 	
-	public void free(T object){
-		if(freeObjects.size() < maxSize){
-			freeObjects.add(object);
+	public void recycle(T object){
+		if(recycledObjects.size() < maxSize){
+			recycledObjects.add(object);
 		}
 	}
 	

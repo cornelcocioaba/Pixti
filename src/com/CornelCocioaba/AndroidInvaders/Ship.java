@@ -18,9 +18,11 @@ public class Ship extends Sprite {
 	private float rightLimit;
 
 	private float lastFireTime;
-	
+	public boolean canMove;
+
 	IOnFireEvent mOnFireCallback;
 	public boolean invulnerable;
+	public boolean alive;
 
 	public Ship(float x, float y, TextureRegion textureRegion) {
 		this(x, y, textureRegion, null);
@@ -28,17 +30,18 @@ public class Ship extends Sprite {
 
 	public Ship(float x, float y, TextureRegion textureRegion, IOnFireEvent callback) {
 		super(x, y, textureRegion);
-		
+
 		this.name = Ship.NAME;
 		this.mOnFireCallback = callback;
 		this.invulnerable = false;
+		this.canMove = true;
+		this.alive = true;
 	}
 
 	public void setLimits(float left, float right) {
 		this.leftLimit = left;
 		this.rightLimit = right;
 	}
-
 
 	public void moveLeft() {
 		direction = -1;
@@ -53,22 +56,24 @@ public class Ship extends Sprite {
 	}
 
 	private void fire() {
-		
-		if(mOnFireCallback != null){
+
+		if (mOnFireCallback != null) {
 			mOnFireCallback.OnFireEvent(this);
 		}
 	}
 
 	@Override
 	public void Update() {
+		if (canMove && alive) {
+			x += speed * direction * Time.deltaTime;
+			x = Mathf.Clamp(x, leftLimit, rightLimit);
 
-		x += speed * direction * Time.deltaTime;
-		x = Mathf.Clamp(x, leftLimit, rightLimit);
-
-		if (Time.time - lastFireTime > 0.7f) {
-			lastFireTime = Time.time;
-			fire();
+			if (Time.time - lastFireTime > 0.7f) {
+				lastFireTime = Time.time;
+				fire();
+			}
 		}
+		super.Update();
 	}
 
 }

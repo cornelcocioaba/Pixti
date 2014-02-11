@@ -19,20 +19,21 @@ import com.CornelCocioaba.Pixti.Utils.Debug;
  * It has infinite size
  */
 
-public abstract class Scene implements OnTouchListener {
+public abstract class Scene {
 	protected Camera mMainCamera;
 	protected HUD mHud;
 	protected GameObject mRoot;
 
 	protected Context mContext;
+	protected Engine mEngine;
 
-	protected Color mBackgroundColor;
+	protected Color mBackgroundColor = new Color(1, 1, 1, 1);
 
-	public Scene(Context context) {
-		mContext = context;
+	public Scene(Engine engine) {
+		mEngine = engine;
+		mContext = engine.getContext();
 		mRoot = new GameObject();
 		Tween.registerAccessor(GameObject.class, new GameObjectAccessor());
-		mBackgroundColor = new Color(0, 0, 0, 1);
 	}
 
 	public void createCamera(int width, int height) {
@@ -99,18 +100,23 @@ public abstract class Scene implements OnTouchListener {
 		return true;
 	}
 
-	@Override
-	public boolean onTouch(View v, MotionEvent event) {
-		return true;
+	public void onCreate() {
+
 	}
 
-	public abstract void onCreate();
+	public void onResize(int width, int height) {
 
-	public abstract void onResize(int width, int height);
+	}
 
-	public abstract void onPause();
+	public void onPause() {
 
-	public abstract void onResume();
+	}
 
-	public abstract void onDestroy();
+	public void onResume() {
+
+	}
+
+	public void onDestroy() {
+
+	};
 }

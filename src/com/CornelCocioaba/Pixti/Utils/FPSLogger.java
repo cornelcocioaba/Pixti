@@ -33,6 +33,7 @@ public class FPSLogger implements IUpdateable {
 			mFPS = nbFrames;
 			nbFrames = 0;
 			mLastTime = currentTime;
+			Debug.log(mFPS);
 		}
 	}
 

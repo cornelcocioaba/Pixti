@@ -1,4 +1,4 @@
-package com.CornelCocioaba.Pixti.Utils;
+package com.CornelCocioaba.Pixti.Graphics;
 
 import java.nio.ByteBuffer;
 import java.nio.ByteOrder;

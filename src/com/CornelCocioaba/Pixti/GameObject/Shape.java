@@ -3,7 +3,7 @@ package com.CornelCocioaba.Pixti.GameObject;
 import java.nio.FloatBuffer;
 import java.nio.ShortBuffer;
 
-import com.CornelCocioaba.Pixti.Utils.BufferUtils;
+import com.CornelCocioaba.Pixti.Graphics.BufferUtils;
 
 
 public abstract class Shape extends GameObject{

@@ -13,4 +13,13 @@ public class TouchEvent {
 	public int type;
 	public int x, y;
 	public int pointer;
+
+	@Override
+	public String toString() {
+		StringBuilder sb = new StringBuilder();
+		sb.append("Type: ").append(type).append(", position:(").append(x).append(", ").append(y).append("); ")
+				.append("PointerID: ").append(pointer);
+		
+		return sb.toString();
+	}
 }

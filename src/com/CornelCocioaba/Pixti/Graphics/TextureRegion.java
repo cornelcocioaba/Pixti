@@ -2,8 +2,6 @@ package com.CornelCocioaba.Pixti.Graphics;
 
 import java.nio.FloatBuffer;
 
-import com.CornelCocioaba.Pixti.Utils.BufferUtils;
-
 public class TextureRegion {
 
 	private Texture texture;
@@ -29,6 +27,24 @@ public class TextureRegion {
 		this.setUvs(x * invWidth, y * invHeight, (x + width) * invWidth, (y + height) * invHeight);
 		
 		this.uvBuffer = BufferUtils.createFloatBuffer(getUVs());
+	}
+	
+	public static TextureRegion[] CreateTextureRegionsFromTiledTexture(Texture texture, int rows, int columns) {
+		TextureRegion[] regions = new TextureRegion[rows * columns];
+
+		int regionWidth = texture.mWidth / columns;
+		int regionHeight = texture.mHeight / rows;
+
+		for (int i = 0; i < rows; i++) {
+			for (int j = 0; j < columns; j++) {
+				int index = i * columns + j;
+				int x = j * regionWidth;
+				int y = i * regionHeight;
+				regions[index] = new TextureRegion(texture, x, y, regionWidth, regionHeight);
+			}
+		}
+
+		return regions;
 	}
 	
 	public TextureRegion deepCopy(){

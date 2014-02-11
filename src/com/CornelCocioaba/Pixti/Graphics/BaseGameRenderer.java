@@ -12,9 +12,8 @@ import com.CornelCocioaba.Pixti.Utils.Debug;
 public abstract class BaseGameRenderer implements Renderer {
 
 	private boolean mSurfaceCreated;
-	private int mWidth;
-	private int mHeight;
-
+	private int mWidth = -1;;
+	private int mHeight = -1;
 
 	public BaseGameRenderer() {
 		mSurfaceCreated = false;
@@ -50,7 +49,7 @@ public abstract class BaseGameRenderer implements Renderer {
 		mWidth = width;
 		mHeight = height;
 
-		onChangedSurface(width, height, mSurfaceCreated);
+		onSurfaceChanged(width, height);
 		mSurfaceCreated = false;
 	}
 
@@ -59,7 +58,7 @@ public abstract class BaseGameRenderer implements Renderer {
 		onDrawFrame();
 	}
 
-	public abstract void onChangedSurface(int width, int height, boolean contextLost);
+	public abstract void onSurfaceChanged(int width, int height);
 
 	public abstract void onDrawFrame();
 }
