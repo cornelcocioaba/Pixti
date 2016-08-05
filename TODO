@@ -14,12 +14,12 @@ Pixti TODO list :
 --Animated Sprite
 --Touch
 --Text
+--Sounds and Music
+--Test Game -Android Invaders
 
 -Accelerometer
--Sounds and Music
 -Particle System
 -VBO, IBO, VAO
--Test Game
 -Optimizations
 -Testing
 -extend to 3D
